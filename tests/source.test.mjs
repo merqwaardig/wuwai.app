@@ -30,6 +30,12 @@ test("keeps navigation and CTA destinations intact", () => {
 test("includes the approved copy and removes superseded content", () => {
   assert.match(page, /title="Ervaren"/);
   assert.match(page, /<p className="section-kicker">Balans<\/p>/);
-  assert.match(page, /Bewust ervaren &amp; herkennen\./);
+  assert.match(page, /Elke dag een stap vooruit\./);
+  assert.match(page, /Bewust kiezen voor meer energie, balans en bewustzijn\./);
+  assert.match(page, /Weinig energie en motivatie/);
+  assert.match(page, /Drank, drugs en social media verslaving/);
   assert.doesNotMatch(page, /Wat valt op, en wat past nu bij jou\?/);
+  assert.doesNotMatch(page, /<p className="section-kicker">De kern<\/p>/);
+  assert.doesNotMatch(page, /<p className="brand-kicker">Wuwai<\/p>/);
+  assert.equal((page.match(/<NextArrow/g) ?? []).length, 8);
 });

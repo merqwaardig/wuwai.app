@@ -23,16 +23,13 @@ const journeySteps = [
 ];
 
 const symptoms = [
-  "Weinig energie",
-  "Weinig motivatie",
-  "Geen richting of levensdoel",
-  "Depressiviteit",
-  "Stress",
-  "Burn-out",
-  "Overgewicht",
-  "Socialmediaverslaving",
-  "Drank- of drugsverslaving",
-  "Emotie-eten",
+  { label: "Weinig energie en motivatie", icon: "↯", color: "#E14F4A" },
+  { label: "Geen richting of levensdoel", icon: "◎", color: "#F0913C" },
+  { label: "Depressiviteit", icon: "☁", color: "#F3C844" },
+  { label: "Stress en burn-out", icon: "≋", color: "#56B26D" },
+  { label: "Overgewicht", icon: "◇", color: "#3F8FD9" },
+  { label: "Drank, drugs en social media verslaving", icon: "∞", color: "#5061B0" },
+  { label: "Emotie-eten", icon: "♡", color: "#8E5BC9" },
 ];
 
 const rhythms = [
@@ -76,6 +73,14 @@ function StepLabel({ number, title }: { number: number; title: string }) {
       <span className="step-separator">·</span>
       <strong>{title}</strong>
     </div>
+  );
+}
+
+function NextArrow({ href, label }: { href: string; label: string }) {
+  return (
+    <a className="next-arrow" href={href} aria-label={label}>
+      <span aria-hidden="true" />
+    </a>
   );
 }
 
@@ -170,7 +175,6 @@ export default function Home() {
           <div className="ambient ambient-two" />
           <div className="section-inner hero-layout">
             <div className="hero-copy reveal">
-              <p className="brand-kicker">Wuwai</p>
               <h1>Alles zit al in je, laat het samenwerken.</h1>
               <p className="hero-intro">
                 Wuwai brengt samen wat al van jou is, zodat je ziet wat je voelt, kunt en wilt.
@@ -185,23 +189,22 @@ export default function Home() {
 
             <div className="orbit-scene reveal reveal-late" aria-label="Alles komt samen rond jou">
               <div className="orbit-halo" />
-              <div className="orbit-core"><span>JIJ</span></div>
+              <div className="orbit-core"><img src="/be-you.svg" alt="Be You" /></div>
               {[
                 "Flow",
                 "Zelfvertrouwen",
                 "Focus",
-                "Talent",
+                "Bewustzijn",
                 "Zelfgeloof",
                 "Energie",
-                "Doelen",
+                "Levensdoel",
+                "Balans",
               ].map((label, index) => (
                 <span key={label} className={`orbit-word orbit-word-${index + 1}`}>{label}</span>
               ))}
             </div>
           </div>
-          <a className="scroll-cue" href="#fundament" aria-label="Ga naar de volgende stap">
-            <span />
-          </a>
+          <NextArrow href="#fundament" label="Ga naar stap 1, Fundament" />
         </section>
 
         <section id="fundament" className="story-section recognition-section">
@@ -214,12 +217,17 @@ export default function Home() {
             </div>
             <div className="symptom-field reveal reveal-late">
               {symptoms.map((symptom, index) => (
-                <span key={symptom} style={{ "--delay": `${index * 45}ms` } as React.CSSProperties}>
-                  {symptom}
+                <span
+                  key={symptom.label}
+                  style={{ "--delay": `${index * 45}ms`, "--symptom-color": symptom.color } as React.CSSProperties}
+                >
+                  <i aria-hidden="true">{symptom.icon}</i>
+                  {symptom.label}
                 </span>
               ))}
             </div>
           </div>
+          <NextArrow href="#voeding-zorg" label="Ga naar stap 2, Ervaren" />
         </section>
 
         <section id="voeding-zorg" className="story-section coherence-section">
@@ -244,6 +252,7 @@ export default function Home() {
               </article>
             </div>
           </div>
+          <NextArrow href="#wilskracht" label="Ga naar stap 3, Wilskracht" />
         </section>
 
         <section id="wilskracht" className="story-section rhythm-section">
@@ -252,7 +261,10 @@ export default function Home() {
             <div className="section-copy rhythm-copy reveal">
               <StepLabel number={3} title="Wilskracht" />
               <p className="section-kicker">Jouw natuurlijke systeem</p>
-              <h2>Ontdek je energetische profiel. Leef in flow met de natuur.</h2>
+              <h2>
+                <span className="rhythm-title-line">Ontdek je energetische profiel.</span>
+                <span className="rhythm-title-line">Leef in flow met de natuur.</span>
+              </h2>
             </div>
             <div className="rhythm-composition reveal reveal-late">
               {rhythms.map((item, index) => (
@@ -265,6 +277,7 @@ export default function Home() {
               <div className="rhythm-pulse" aria-hidden="true"><i /><i /><i /></div>
             </div>
           </div>
+          <NextArrow href="#liefde-verbinding" label="Ga naar stap 4, Liefde en verbinding" />
         </section>
 
         <section id="liefde-verbinding" className="story-section core-section">
@@ -272,7 +285,7 @@ export default function Home() {
             <div className="section-copy reveal">
               <StepLabel number={4} title="Liefde & verbinding" />
               <p className="section-kicker">Terug naar je kern</p>
-              <h2>Laat los wat niet meer past. Kom terug bij jezelf.</h2>
+              <h2>Laat los wat niet meer past.</h2>
               <p className="section-intro">
                 Herken overtuigingen en patronen die je sturen. Zo ontstaat er ruimte om te leven vanuit passie en liefde, op de manier die bij je klopt.
               </p>
@@ -284,6 +297,7 @@ export default function Home() {
               <div className="blueprint-center"><img src="/be-you.svg" alt="Be You" /></div>
             </div>
           </div>
+          <NextArrow href="#communicatie" label="Ga naar stap 5, Communicatie" />
         </section>
 
         <section id="communicatie" className="story-section choice-section">
@@ -291,7 +305,7 @@ export default function Home() {
             <div className="section-copy reveal">
               <StepLabel number={5} title="Communicatie" />
               <p className="section-kicker">Zo werkt het</p>
-              <h2>Bewust kiezen om het anders te doen.</h2>
+              <h2>Bewust kiezen het anders te doen.</h2>
               <p className="section-intro">Geen grote ommezwaai. Eén eerlijke observatie en één keuze die vandaag haalbaar voelt.</p>
             </div>
             <div className="choice-path reveal reveal-late">
@@ -301,6 +315,7 @@ export default function Home() {
               <div className="choice-line" aria-hidden="true" />
             </div>
           </div>
+          <NextArrow href="#intuitie" label="Ga naar stap 6, Intuïtie" />
         </section>
 
         <section id="intuitie" className="story-section day-section">
@@ -308,7 +323,7 @@ export default function Home() {
             <div className="section-copy reveal">
               <StepLabel number={6} title="Intuïtie" />
               <p className="section-kicker">Balans</p>
-              <h2>Bewust ervaren &amp; herkennen.</h2>
+              <h2>Elke dag een stap vooruit.</h2>
               <p className="section-intro">Wuwai beweegt mee met je dag, zonder je dag over te nemen.</p>
             </div>
             <div className="day-line reveal reveal-late">
@@ -318,6 +333,7 @@ export default function Home() {
               <article><time>Morgen</time><strong>Kijk terug</strong><p>Wat merkte je?</p></article>
             </div>
           </div>
+          <NextArrow href="#spiritualiteit" label="Ga naar stap 7, Spiritualiteit" />
         </section>
 
         <section id="spiritualiteit" className="story-section growth-section">
@@ -327,18 +343,17 @@ export default function Home() {
             <div className="section-copy reveal">
               <StepLabel number={7} title="Spiritualiteit" />
               <p className="section-kicker">Vooruitgang & vertrouwen</p>
-              <h2>Met kleine stappen wordt steeds duidelijker wat voor jou werkt.</h2>
+              <h2>Bewust kiezen voor meer energie, balans en bewustzijn.</h2>
               <p className="section-intro">Kleine observaties worden betere vragen. Kleine keuzes worden nieuwe ervaringen.</p>
             </div>
             <div className="growth-visual reveal reveal-late">
-              <div className="growth-curve" aria-label="De terugkerende beweging van zien, proberen, leren en bijstellen">
+              <div className="growth-curve" aria-label="De terugkerende beweging van zien, begrijpen en doen">
                 <svg className="growth-path" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
                   <path pathLength="1" d="M 70 238 C 250 226, 340 190, 500 145 S 770 62, 930 58" />
                 </svg>
                 <span className="growth-point point-one">zien</span>
-                <span className="growth-point point-two">proberen</span>
-                <span className="growth-point point-three">leren</span>
-                <span className="growth-point point-four">bijstellen</span>
+                <span className="growth-point point-two">begrijpen</span>
+                <span className="growth-point point-three">doen</span>
               </div>
               <div className="trust-lines">
                 <p><i>✓</i> Jouw data, jouw controle.</p>
@@ -347,12 +362,12 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <NextArrow href="#signup" label="Ga naar de afsluiting en early access" />
         </section>
 
         <section id="signup" className="story-section signup-section">
           <div className="signup-aura" />
           <div className="section-inner signup-layout reveal">
-            <p className="section-kicker">De kern</p>
             <img className="be-you-logo" src="/be-you.svg" alt="Be You" />
             <h2>Niet iemand anders worden, maar dichter komen bij wie je eigenlijk bent.</h2>
             <p className="signup-line">Groei in energie, balans en bewustzijn.</p>
@@ -366,7 +381,8 @@ export default function Home() {
                 <input type="email" name="email" placeholder="E-mailadres" autoComplete="email" required />
               </label>
               <button className="primary-button" type="submit">Ik wil early access</button>
-              <p className="form-success" role="status">Dankjewel. Je staat op de early-accesslijst.</p>
+              <p className="form-note">Je gegevens worden in deze versie nog niet opgeslagen.</p>
+              <p className="form-success" role="status">Dankjewel. De opslagkoppeling wordt nog toegevoegd.</p>
             </form>
           </div>
         </section>
