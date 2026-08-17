@@ -23,4 +23,13 @@ test("keeps navigation and CTA destinations intact", () => {
     assert.match(page, new RegExp(`id: "${id}"|id="${id}"`));
   }
   assert.ok((page.match(/href="#signup"/g) ?? []).length >= 2);
+  assert.match(page, /className="journey-nav"/);
+  assert.match(page, /className="secondary-button"/);
+});
+
+test("includes the approved copy and removes superseded content", () => {
+  assert.match(page, /title="Ervaren"/);
+  assert.match(page, /<p className="section-kicker">Balans<\/p>/);
+  assert.match(page, /Bewust ervaren &amp; herkennen\./);
+  assert.doesNotMatch(page, /Wat valt op, en wat past nu bij jou\?/);
 });

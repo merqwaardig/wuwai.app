@@ -14,7 +14,7 @@ const chakraColors = [
 
 const journeySteps = [
   { id: "fundament", label: "Fundament" },
-  { id: "voeding-zorg", label: "Voeding & zorg" },
+  { id: "voeding-zorg", label: "Ervaren" },
   { id: "wilskracht", label: "Wilskracht" },
   { id: "liefde-verbinding", label: "Liefde & verbinding" },
   { id: "communicatie", label: "Communicatie" },
@@ -129,32 +129,40 @@ export default function Home() {
         <a className="brand" href="#top" aria-label="Wuwai, terug naar boven">
           <img src="/wuwai-logo.png" alt="Wuwai" />
         </a>
-        <div className="journey-progress" aria-label={`Scherm ${active + 1} van 9`}>
-          <span className="progress-count">{String(active + 1).padStart(2, "0")}</span>
-          <div className="progress-track" aria-hidden="true">
-            <i style={{ transform: `scaleX(${(active + 1) / 9})` }} />
-          </div>
-          <span className="progress-total">09</span>
-        </div>
+        <nav className="journey-nav" aria-label={`Scherm ${active + 1} van 9`}>
+          <a
+            className={`journey-endpoint ${active === 0 ? "is-active" : ""}`}
+            href="#top"
+            aria-label="Intro"
+            aria-current={active === 0 ? "step" : undefined}
+          >
+            01
+          </a>
+          {journeySteps.map((step, index) => (
+            <a
+              key={step.id}
+              href={`#${step.id}`}
+              aria-label={`Stap ${index + 1}: ${step.label}`}
+              aria-current={active === index + 1 ? "step" : undefined}
+              className={`journey-dot ${active === index + 1 ? "is-active" : ""}`}
+              style={{ "--nav-color": chakraColors[index] } as React.CSSProperties}
+            >
+              <span />
+            </a>
+          ))}
+          <a
+            className={`journey-endpoint ${active === 8 ? "is-active" : ""}`}
+            href="#signup"
+            aria-label="Afsluiting en early access"
+            aria-current={active === 8 ? "step" : undefined}
+          >
+            09
+          </a>
+        </nav>
         <a className="header-cta" href="#signup">
           Early access
         </a>
       </header>
-
-      <nav className="chakra-rail" aria-label="Navigeer door de zeven stappen">
-        {journeySteps.map((step, index) => (
-          <a
-            key={step.id}
-            href={`#${step.id}`}
-            aria-label={`Stap ${index + 1}: ${step.label}`}
-            aria-current={active === index + 1 ? "step" : undefined}
-            className={active === index + 1 ? "is-active" : ""}
-            style={{ "--rail-color": chakraColors[index] } as React.CSSProperties}
-          >
-            <span />
-          </a>
-        ))}
-      </nav>
 
       <main>
         <section id="top" className="story-section hero-section is-visible">
@@ -171,7 +179,7 @@ export default function Home() {
                 <a className="primary-button" href="#signup">
                   Ik wil early access
                 </a>
-                <a href="#fundament">Ontdek hoe het werkt</a>
+                <a className="secondary-button" href="#fundament">Ontdek hoe het werkt</a>
               </div>
             </div>
 
@@ -217,7 +225,7 @@ export default function Home() {
         <section id="voeding-zorg" className="story-section coherence-section">
           <div className="section-inner coherence-layout">
             <div className="section-copy reveal">
-              <StepLabel number={2} title="Voeding & zorg" />
+              <StepLabel number={2} title="Ervaren" />
               <p className="section-kicker">Van losse signalen naar samenhang</p>
               <h2>Wat los voelt, kan samen een patroon vormen.</h2>
               <p className="section-intro">
@@ -234,7 +242,6 @@ export default function Home() {
               <article className="signal signal-soul">
                 <span>03</span><h3>Ziel</h3><p>Liefde · verbinding · levensdoel</p>
               </article>
-              <div className="signal-question">Wat valt op, en wat past nu bij jou?</div>
             </div>
           </div>
         </section>
@@ -300,8 +307,8 @@ export default function Home() {
           <div className="section-inner day-layout">
             <div className="section-copy reveal">
               <StepLabel number={6} title="Intuïtie" />
-              <p className="section-kicker">Een dag met Wuwai</p>
-              <h2>Klein genoeg voor vandaag.</h2>
+              <p className="section-kicker">Balans</p>
+              <h2>Bewust ervaren &amp; herkennen.</h2>
               <p className="section-intro">Wuwai beweegt mee met je dag, zonder je dag over te nemen.</p>
             </div>
             <div className="day-line reveal reveal-late">
@@ -324,7 +331,10 @@ export default function Home() {
               <p className="section-intro">Kleine observaties worden betere vragen. Kleine keuzes worden nieuwe ervaringen.</p>
             </div>
             <div className="growth-visual reveal reveal-late">
-              <div className="growth-curve" aria-hidden="true">
+              <div className="growth-curve" aria-label="De terugkerende beweging van zien, proberen, leren en bijstellen">
+                <svg className="growth-path" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
+                  <path pathLength="1" d="M 70 238 C 250 226, 340 190, 500 145 S 770 62, 930 58" />
+                </svg>
                 <span className="growth-point point-one">zien</span>
                 <span className="growth-point point-two">proberen</span>
                 <span className="growth-point point-three">leren</span>
