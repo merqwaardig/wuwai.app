@@ -12,6 +12,16 @@ const chakraColors = [
   "#8E5BC9",
 ];
 
+const journeySteps = [
+  { id: "fundament", label: "Fundament" },
+  { id: "voeding-zorg", label: "Voeding & zorg" },
+  { id: "wilskracht", label: "Wilskracht" },
+  { id: "liefde-verbinding", label: "Liefde & verbinding" },
+  { id: "communicatie", label: "Communicatie" },
+  { id: "intuitie", label: "Intuïtie" },
+  { id: "spiritualiteit", label: "Spiritualiteit" },
+];
+
 const symptoms = [
   "Weinig energie",
   "Weinig motivatie",
@@ -84,7 +94,7 @@ export default function Home() {
           if (index >= 0) setActive(index);
         });
       },
-      { threshold: 0.48 },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -108,10 +118,6 @@ export default function Home() {
     };
   }, []);
 
-  const scrollToSignup = () => {
-    document.getElementById("signup")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitted(true);
@@ -130,20 +136,25 @@ export default function Home() {
           </div>
           <span className="progress-total">09</span>
         </div>
-        <button className="header-cta" type="button" onClick={scrollToSignup}>
+        <a className="header-cta" href="#signup">
           Early access
-        </button>
+        </a>
       </header>
 
-      <aside className="chakra-rail" aria-hidden="true">
-        {chakraColors.map((color, index) => (
-          <span
-            key={color}
+      <nav className="chakra-rail" aria-label="Navigeer door de zeven stappen">
+        {journeySteps.map((step, index) => (
+          <a
+            key={step.id}
+            href={`#${step.id}`}
+            aria-label={`Stap ${index + 1}: ${step.label}`}
+            aria-current={active === index + 1 ? "step" : undefined}
             className={active === index + 1 ? "is-active" : ""}
-            style={{ "--rail-color": color } as React.CSSProperties}
-          />
+            style={{ "--rail-color": chakraColors[index] } as React.CSSProperties}
+          >
+            <span />
+          </a>
         ))}
-      </aside>
+      </nav>
 
       <main>
         <section id="top" className="story-section hero-section is-visible">
@@ -157,10 +168,10 @@ export default function Home() {
                 Wuwai brengt samen wat al van jou is, zodat je ziet wat je voelt, kunt en wilt.
               </p>
               <div className="hero-actions">
-                <button className="primary-button" type="button" onClick={scrollToSignup}>
+                <a className="primary-button" href="#signup">
                   Ik wil early access
-                </button>
-                <a href="#herkenning">Ontdek hoe het werkt</a>
+                </a>
+                <a href="#fundament">Ontdek hoe het werkt</a>
               </div>
             </div>
 
@@ -180,12 +191,12 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <a className="scroll-cue" href="#herkenning" aria-label="Ga naar de volgende stap">
+          <a className="scroll-cue" href="#fundament" aria-label="Ga naar de volgende stap">
             <span />
           </a>
         </section>
 
-        <section id="herkenning" className="story-section recognition-section">
+        <section id="fundament" className="story-section recognition-section">
           <div className="section-inner split-layout">
             <div className="section-copy reveal">
               <StepLabel number={1} title="Fundament" />
@@ -203,7 +214,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="story-section coherence-section">
+        <section id="voeding-zorg" className="story-section coherence-section">
           <div className="section-inner coherence-layout">
             <div className="section-copy reveal">
               <StepLabel number={2} title="Voeding & zorg" />
@@ -228,7 +239,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="story-section rhythm-section">
+        <section id="wilskracht" className="story-section rhythm-section">
           <div className="rhythm-glow" />
           <div className="section-inner">
             <div className="section-copy rhythm-copy reveal">
@@ -249,7 +260,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="story-section core-section">
+        <section id="liefde-verbinding" className="story-section core-section">
           <div className="section-inner core-layout">
             <div className="section-copy reveal">
               <StepLabel number={4} title="Liefde & verbinding" />
@@ -268,7 +279,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="story-section choice-section">
+        <section id="communicatie" className="story-section choice-section">
           <div className="section-inner choice-layout">
             <div className="section-copy reveal">
               <StepLabel number={5} title="Communicatie" />
@@ -285,7 +296,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="story-section day-section">
+        <section id="intuitie" className="story-section day-section">
           <div className="section-inner day-layout">
             <div className="section-copy reveal">
               <StepLabel number={6} title="Intuïtie" />
@@ -302,7 +313,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="story-section growth-section">
+        <section id="spiritualiteit" className="story-section growth-section">
           <div className="growth-orb growth-orb-one" />
           <div className="growth-orb growth-orb-two" />
           <div className="section-inner growth-layout">

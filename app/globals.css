@@ -125,6 +125,9 @@ button {
 
 .header-cta {
   min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0 14px;
   border: 0;
   border-radius: 15px;
@@ -145,6 +148,7 @@ button {
   align-items: center;
   padding: 104px 20px 56px;
   isolation: isolate;
+  scroll-margin-top: 72px;
 }
 
 .section-inner {
@@ -1176,15 +1180,33 @@ form.is-submitted .form-success {
     gap: 11px;
   }
 
-  .chakra-rail span {
+  .chakra-rail a {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+  }
+
+  .chakra-rail a:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--rail-color) 72%, #111311);
+    outline-offset: 2px;
+  }
+
+  .chakra-rail a span {
     width: 8px;
     height: 8px;
+    display: block;
     border-radius: 50%;
     background: color-mix(in srgb, var(--rail-color) 32%, transparent);
     transition: transform 400ms var(--ease-out), background 400ms ease, box-shadow 400ms ease;
   }
 
-  .chakra-rail span.is-active {
+  .chakra-rail a:hover span {
+    background: color-mix(in srgb, var(--rail-color) 70%, transparent);
+  }
+
+  .chakra-rail a.is-active span {
     transform: scale(1.55);
     background: var(--rail-color);
     box-shadow: 0 0 0 6px color-mix(in srgb, var(--rail-color) 13%, transparent);
