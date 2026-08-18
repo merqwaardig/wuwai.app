@@ -86,7 +86,7 @@ function NextArrow({ href, label }: { href: string; label: string }) {
 
 export default function Home() {
   const [active, setActive] = useState(0);
-  const [submitted, setSubmitted] = useState(false);
+  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>(".story-section"));
@@ -123,9 +123,30 @@ export default function Home() {
     };
   }, []);
 
-  const submit = (event: FormEvent<HTMLFormElement>) => {
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSubmitted(true);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    setFormStatus("submitting");
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(Object.fromEntries(formData.entries())),
+      });
+
+      if (!response.ok) throw new Error("FormSubmit kon de aanmelding niet verwerken.");
+
+      setFormStatus("success");
+      form.reset();
+    } catch {
+      setFormStatus("error");
+    }
   };
 
   return (
@@ -371,7 +392,16 @@ export default function Home() {
             <img className="be-you-logo" src="/be-you.svg" alt="Be You" />
             <h2>Niet iemand anders worden, maar dichter komen bij wie je eigenlijk bent.</h2>
             <p className="signup-line">Groei in energie, balans en bewustzijn.</p>
-            <form onSubmit={submit} className={submitted ? "is-submitted" : ""}>
+            <form
+              action="https://formsubmit.co/ajax/contact@wuwai.org"
+              method="POST"
+              onSubmit={submit}
+              className={formStatus === "success" ? "is-success" : ""}
+            >
+              <input type="hidden" name="_subject" value="Nieuwe early-accessaanmelding voor Wuwai" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_url" value="https://www.wuwai.app/#signup" />
+              <input className="form-honeypot" type="text" name="_honey" tabIndex={-1} autoComplete="off" />
               <label>
                 <span>Naam</span>
                 <input type="text" name="name" placeholder="Naam" autoComplete="name" required />
@@ -380,9 +410,18 @@ export default function Home() {
                 <span>E-mailadres</span>
                 <input type="email" name="email" placeholder="E-mailadres" autoComplete="email" required />
               </label>
-              <button className="primary-button" type="submit">Ik wil early access</button>
-              <p className="form-note">Je gegevens worden in deze versie nog niet opgeslagen.</p>
-              <p className="form-success" role="status">Dankjewel. De opslagkoppeling wordt nog toegevoegd.</p>
+              <button className="primary-button" type="submit" disabled={formStatus === "submitting"}>
+                {formStatus === "submitting" ? "Even versturen…" : "Ik wil early access"}
+              </button>
+              <p className="form-note">Je gegevens worden via FormSubmit doorgestuurd naar contact@wuwai.org.</p>
+              <div className="form-feedback" aria-live="polite">
+                {formStatus === "success" && (
+                  <p className="form-success">Dankjewel. Je aanmelding is verzonden.</p>
+                )}
+                {formStatus === "error" && (
+                  <p className="form-error">Dat ging niet goed. Probeer het nog een keer.</p>
+                )}
+              </div>
             </form>
           </div>
         </section>

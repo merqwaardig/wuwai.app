@@ -27,6 +27,14 @@ test("keeps navigation and CTA destinations intact", () => {
   assert.match(page, /className="secondary-button"/);
 });
 
+test("sends early-access signups to FormSubmit", () => {
+  assert.match(page, /https:\/\/formsubmit\.co\/ajax\/contact@wuwai\.org/);
+  assert.match(page, /method="POST"/);
+  assert.match(page, /name="_honey"/);
+  assert.match(page, /Je aanmelding is verzonden\./);
+  assert.doesNotMatch(page, /nog niet opgeslagen/);
+});
+
 test("includes the approved copy and removes superseded content", () => {
   assert.match(page, /title="Ervaren"/);
   assert.match(page, /<p className="section-kicker">Balans<\/p>/);

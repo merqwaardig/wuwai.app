@@ -1140,6 +1140,21 @@ form .primary-button {
   margin-top: 4px;
 }
 
+form .primary-button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+  transform: none;
+}
+
+.form-honeypot {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .form-note {
   margin: 2px 0 0;
   color: var(--muted);
@@ -1147,25 +1162,33 @@ form .primary-button {
   line-height: 1.4;
 }
 
-.form-success {
-  display: none;
+.form-feedback {
+  min-height: 0;
+}
+
+.form-success,
+.form-error {
   margin: 6px 0 0;
   padding: 11px 14px;
   border-radius: 12px;
+  font-size: 13px;
+  animation: success-in 300ms var(--ease-out) both;
+}
+
+.form-success {
   background: color-mix(in srgb, #34c759 9%, transparent);
   color: color-mix(in srgb, #34c759 55%, #000);
-  font-size: 13px;
 }
 
-form.is-submitted label,
-form.is-submitted button,
-form.is-submitted .form-note {
+.form-error {
+  background: color-mix(in srgb, #e14f4a 9%, transparent);
+  color: color-mix(in srgb, #e14f4a 68%, #000);
+}
+
+form.is-success label,
+form.is-success button,
+form.is-success .form-note {
   display: none;
-}
-
-form.is-submitted .form-success {
-  display: block;
-  animation: success-in 300ms var(--ease-out) both;
 }
 
 @keyframes slow-spin {
