@@ -316,10 +316,7 @@ h2 {
 
 /* Step 1 */
 .ownership-section {
-  background:
-    radial-gradient(circle at 18% 16%, oklch(0.84 0.14 90 / 0.22), transparent 24%),
-    radial-gradient(circle at 84% 75%, oklch(0.68 0.15 147 / 0.17), transparent 31%),
-    var(--canvas);
+  background: oklch(0.16 0.015 80);
 }
 
 .ownership-section::after {
@@ -327,7 +324,30 @@ h2 {
   position: absolute;
   z-index: 1;
   inset: 0;
-  background: linear-gradient(90deg, var(--canvas) 5%, oklch(0.97 0.007 85 / 0.96) 38%, oklch(0.97 0.007 85 / 0.44) 62%, transparent 82%);
+  background:
+    linear-gradient(90deg, oklch(0.11 0.015 80 / 0.88) 0%, oklch(0.12 0.015 80 / 0.7) 42%, oklch(0.12 0.015 80 / 0.16) 72%, transparent 100%),
+    linear-gradient(0deg, oklch(0.1 0.01 80 / 0.5) 0%, transparent 45%);
+  pointer-events: none;
+}
+
+.hero-background,
+.hero-image-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-background {
+  z-index: 0;
+  object-fit: cover;
+  object-position: center center;
+  animation: hero-image-in 1.6s var(--ease-out) both;
+}
+
+.hero-image-overlay {
+  z-index: 1;
+  background: radial-gradient(circle at 75% 35%, transparent 0%, oklch(0.1 0.01 80 / 0.13) 72%);
   pointer-events: none;
 }
 
@@ -378,6 +398,16 @@ h2 {
   padding-bottom: clamp(30px, 6vh, 76px);
 }
 
+.ownership-section .step-eyebrow {
+  color: oklch(0.94 0.025 145 / 0.86);
+}
+
+.ownership-section .step-eyebrow span {
+  background: oklch(0.98 0.005 90 / 0.16);
+  box-shadow: 0 8px 28px oklch(0.05 0.01 80 / 0.18);
+  color: oklch(0.985 0.005 90);
+}
+
 .ownership-copy h1 {
   margin-bottom: 25px;
   font-size: clamp(4rem, 8vw, 8.8rem);
@@ -386,7 +416,7 @@ h2 {
 
 .headline-static {
   display: block;
-  color: var(--green-dark);
+  color: oklch(0.985 0.005 90);
 }
 
 .headline-window {
@@ -395,7 +425,7 @@ h2 {
   height: 0.98em;
   display: block;
   overflow: hidden;
-  color: var(--ink);
+  color: oklch(0.985 0.005 90);
 }
 
 .headline-measure {
@@ -432,7 +462,7 @@ h2 {
 .hero-subline {
   max-width: 56ch;
   margin-bottom: 0;
-  color: var(--muted);
+  color: oklch(0.95 0.01 90 / 0.75);
   font-size: clamp(1rem, 1.35vw, 1.2rem);
   line-height: 1.55;
 }
@@ -444,7 +474,7 @@ h2 {
 
 .hero-subline strong {
   margin-bottom: 5px;
-  color: var(--ink);
+  color: oklch(0.985 0.005 90);
   font-size: 1.08em;
 }
 
@@ -667,9 +697,9 @@ h2 {
   position: relative;
   min-height: 540px;
   display: grid;
-  grid-template-columns: 220px 1fr;
-  align-items: center;
-  gap: 18px;
+  grid-template-columns: 1fr;
+  align-content: center;
+  gap: 10px;
 }
 
 .channel-orbit {
@@ -815,6 +845,124 @@ h2 {
   line-height: 1.45;
 }
 
+.phone-showcase {
+  position: relative;
+  min-height: 510px;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+
+.phone-card {
+  position: absolute;
+  width: clamp(190px, 17vw, 232px);
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    transform 650ms var(--ease-out),
+    filter 420ms ease,
+    opacity 420ms ease;
+}
+
+.phone-frame {
+  position: relative;
+  display: block;
+  aspect-ratio: 1170 / 2532;
+  overflow: hidden;
+  border: 7px solid oklch(0.2 0.01 150);
+  border-radius: 34px;
+  background: var(--surface);
+  box-shadow: 0 28px 64px oklch(0.25 0.03 150 / 0.24);
+}
+
+.phone-frame img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.phone-speaker {
+  position: absolute;
+  z-index: 2;
+  top: 7px;
+  left: 50%;
+  width: 34%;
+  height: 13px;
+  border-radius: 999px;
+  background: oklch(0.2 0.01 150);
+  transform: translateX(-50%);
+}
+
+.phone-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+  white-space: nowrap;
+}
+
+.phone-label > span {
+  color: color-mix(in oklch, var(--channel-color) 78%, var(--ink));
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.phone-label strong {
+  font-family: Montserrat, system-ui, sans-serif;
+  font-size: 0.94rem;
+  letter-spacing: -0.03em;
+}
+
+.phone-doelen {
+  z-index: 1;
+  transform: translateX(-74%) rotate(-7deg) scale(0.88);
+}
+
+.phone-lichaam {
+  z-index: 3;
+  transform: translateY(-12px);
+}
+
+.phone-coach {
+  z-index: 2;
+  transform: translateX(74%) rotate(7deg) scale(0.88);
+}
+
+.phone-card:not(.is-active) {
+  filter: saturate(0.7) brightness(0.98);
+}
+
+.phone-doelen.is-active {
+  z-index: 5;
+  transform: translateX(-63%) rotate(-3deg) scale(0.98);
+}
+
+.phone-lichaam.is-active {
+  z-index: 5;
+  transform: translateY(-18px) scale(1.04);
+}
+
+.phone-coach.is-active {
+  z-index: 5;
+  transform: translateX(63%) rotate(3deg) scale(0.98);
+}
+
+.active-channel-copy {
+  min-height: 3.1em;
+  max-width: 48ch;
+  margin: -2px auto 0;
+  color: var(--green-dark);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.55;
+  text-align: center;
+}
+
 /* Step 3 */
 .result-section {
   background:
@@ -861,7 +1009,7 @@ h2 {
 
 .be-you-destination {
   position: relative;
-  min-height: 570px;
+  min-height: 610px;
   display: grid;
   align-content: center;
   justify-items: center;
@@ -903,10 +1051,56 @@ h2 {
 
 .be-you-mark {
   position: relative;
-  z-index: 2;
-  width: min(72%, 360px);
-  margin-bottom: 36px;
+  z-index: 4;
+  width: min(32%, 160px);
+  margin-bottom: 118px;
   filter: drop-shadow(0 20px 40px oklch(0.4 0.04 150 / 0.12));
+}
+
+.polaroid-cluster {
+  position: absolute;
+  z-index: 2;
+  top: 43%;
+  left: 50%;
+  width: min(100%, 540px);
+  height: 430px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.polaroid {
+  position: absolute;
+  width: 142px;
+  margin: 0;
+  padding: 8px 8px 25px;
+  background: oklch(0.992 0.004 90);
+  box-shadow: 0 22px 48px oklch(0.28 0.035 150 / 0.2);
+}
+
+.polaroid img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  display: block;
+  object-fit: cover;
+  filter: saturate(0.92) contrast(0.98);
+}
+
+.polaroid-child {
+  top: 4%;
+  left: 2%;
+  transform: rotate(-8deg);
+}
+
+.polaroid-elder {
+  top: 1%;
+  right: 1%;
+  transform: rotate(7deg);
+}
+
+.polaroid-adult {
+  right: 5%;
+  bottom: 0;
+  transform: rotate(-5deg);
 }
 
 .access-panel {
@@ -1102,6 +1296,11 @@ h2 {
   }
 }
 
+@keyframes hero-image-in {
+  from { opacity: 0; transform: scale(1.04); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 @media (max-width: 1050px) {
   .result-layout {
     grid-template-columns: minmax(0, 1fr) minmax(380px, 0.82fr);
@@ -1119,11 +1318,8 @@ h2 {
   }
 
   .channel-experience {
-    grid-template-columns: 150px 1fr;
-  }
-
-  .channel-orbit {
-    width: 150px;
+    min-height: 520px;
+    grid-template-columns: 1fr;
   }
 
   .channel:nth-child(1),
@@ -1238,8 +1434,48 @@ h2 {
   }
 
   .channel-experience {
-    min-height: 0;
+    min-height: 430px;
     grid-template-columns: 1fr;
+  }
+
+  .phone-showcase {
+    min-height: 370px;
+  }
+
+  .phone-card {
+    width: clamp(145px, 37vw, 182px);
+  }
+
+  .phone-frame {
+    border-width: 6px;
+    border-radius: 28px;
+  }
+
+  .phone-speaker {
+    top: 5px;
+    height: 10px;
+  }
+
+  .phone-doelen {
+    transform: translateX(-57%) rotate(-6deg) scale(0.87);
+  }
+
+  .phone-coach {
+    transform: translateX(57%) rotate(6deg) scale(0.87);
+  }
+
+  .phone-doelen.is-active {
+    transform: translateX(-50%) rotate(-2deg) scale(0.96);
+  }
+
+  .phone-coach.is-active {
+    transform: translateX(50%) rotate(2deg) scale(0.96);
+  }
+
+  .active-channel-copy {
+    min-height: 2.8em;
+    max-width: 42ch;
+    font-size: 12px;
   }
 
   .channel-orbit {
@@ -1284,7 +1520,7 @@ h2 {
   }
 
   .be-you-destination {
-    min-height: 280px;
+    min-height: 380px;
   }
 
   .be-you-rings {
@@ -1292,8 +1528,19 @@ h2 {
   }
 
   .be-you-mark {
-    width: min(62%, 280px);
-    margin-bottom: 22px;
+    width: min(30%, 132px);
+    margin-bottom: 92px;
+  }
+
+  .polaroid-cluster {
+    top: 43%;
+    width: min(92vw, 390px);
+    height: 300px;
+  }
+
+  .polaroid {
+    width: 98px;
+    padding: 5px 5px 17px;
   }
 
   .access-panel form {
@@ -1348,7 +1595,13 @@ h2 {
   }
 
   .ownership-section::after {
-    background: linear-gradient(90deg, var(--canvas) 0%, oklch(0.97 0.007 85 / 0.93) 53%, oklch(0.97 0.007 85 / 0.2) 100%);
+    background:
+      linear-gradient(90deg, oklch(0.1 0.012 80 / 0.88) 0%, oklch(0.1 0.012 80 / 0.64) 62%, oklch(0.1 0.012 80 / 0.18) 100%),
+      linear-gradient(0deg, oklch(0.08 0.01 80 / 0.58) 0%, transparent 52%);
+  }
+
+  .hero-background {
+    object-position: 58% center;
   }
 
   .hero-main-visual {
@@ -1383,6 +1636,27 @@ h2 {
     min-height: 84px;
   }
 
+  .channel-experience {
+    min-height: 355px;
+  }
+
+  .phone-showcase {
+    min-height: 300px;
+  }
+
+  .phone-card {
+    width: clamp(132px, 39vw, 158px);
+  }
+
+  .phone-label {
+    gap: 5px;
+    margin-top: 8px;
+  }
+
+  .phone-label strong {
+    font-size: 0.76rem;
+  }
+
   .channel-text > span {
     display: -webkit-box;
     overflow: hidden;
@@ -1408,12 +1682,22 @@ h2 {
   }
 
   .be-you-destination {
-    min-height: 235px;
+    min-height: 330px;
   }
 
   .be-you-mark {
-    width: min(58%, 220px);
-    margin-bottom: 15px;
+    width: min(29%, 112px);
+    margin-bottom: 78px;
+  }
+
+  .polaroid-cluster {
+    width: min(92vw, 340px);
+    height: 260px;
+  }
+
+  .polaroid {
+    width: 86px;
+    padding: 4px 4px 14px;
   }
 
   .access-panel summary {

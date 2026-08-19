@@ -23,7 +23,8 @@ const channels = [
     title: "Jouw doelen",
     copy: "Bepaal wat jij wilt bereiken en kom stap voor stap in actie.",
     color: "var(--solar)",
-    icon: "/chakra-3.svg",
+    screenshot: "/app-doelen.png",
+    imageAlt: "Wuwai-appscherm Jouw doelen met voortgang en dagelijkse acties",
   },
   {
     id: "lichaam",
@@ -31,7 +32,8 @@ const channels = [
     title: "Jouw lichaam",
     copy: "Ontdek de samenhang tussen lichaam, geest en ziel, van energie en emoties tot bewustzijn.",
     color: "var(--heart)",
-    icon: "/chakra-4.svg",
+    screenshot: "/app-lichaam.png",
+    imageAlt: "Wuwai-appscherm Jouw lichaam met balans en zeven energieniveaus",
   },
   {
     id: "coach",
@@ -39,7 +41,8 @@ const channels = [
     title: "Jouw coach",
     copy: "Krijg persoonlijke begeleiding, inzichten en inspiratie om toe te passen wat voor jou werkt.",
     color: "var(--throat)",
-    icon: "/chakra-5.svg",
+    screenshot: "/app-coach.png",
+    imageAlt: "Wuwai-appscherm Jouw coach met persoonlijke signalen en inzichten",
   },
 ];
 
@@ -139,7 +142,7 @@ export default function Home() {
           ))}
         </nav>
 
-        <a className="header-action" href="#resultaat">Let&apos;s go</a>
+        <a className="header-action" href="#resultaat">Ontdek de app</a>
       </header>
 
       <main>
@@ -148,9 +151,8 @@ export default function Home() {
           className="v2-section ownership-section is-visible"
           onPointerMove={moveEnergy}
         >
-          <div className="pointer-light" aria-hidden="true" />
-          <div className="ownership-wash ownership-wash-one" aria-hidden="true" />
-          <div className="ownership-wash ownership-wash-two" aria-hidden="true" />
+          <img className="hero-background" src="/hero-v2.png" alt="" aria-hidden="true" />
+          <div className="hero-image-overlay" aria-hidden="true" />
 
           <div className="v2-inner ownership-layout">
             <div className="ownership-copy reveal">
@@ -176,22 +178,6 @@ export default function Home() {
               </a>
             </div>
 
-            <div className="self-field hero-main-visual" aria-label="Jij staat centraal in jouw tijd, energie en leven">
-              <div className="self-aura" aria-hidden="true" />
-              <div className="self-ring self-ring-outer" aria-hidden="true" />
-              <div className="self-ring self-ring-middle" aria-hidden="true" />
-              <div className="self-ring self-ring-inner" aria-hidden="true" />
-              <span className="field-word field-word-life">leven</span>
-              <span className="field-word field-word-energy">energie</span>
-              <span className="field-word field-word-time">tijd</span>
-              <div className="self-core">
-                <span>Jij</span>
-                <small>aan het roer</small>
-              </div>
-              <div className="energy-pulse energy-pulse-one" aria-hidden="true" />
-              <div className="energy-pulse energy-pulse-two" aria-hidden="true" />
-              <div className="energy-pulse energy-pulse-three" aria-hidden="true" />
-            </div>
           </div>
 
           <DownArrow href="#ervaring" label="Ga naar stap 2, ervaar hoe het werkt" />
@@ -209,34 +195,34 @@ export default function Home() {
             </div>
 
             <div className="channel-experience reveal reveal-late">
-              <div className="channel-orbit" aria-hidden="true">
-                <span className="channel-orbit-ring" />
-                <span className="channel-orbit-core">Jij</span>
-              </div>
-
-              <div className="channel-list" role="list" aria-label="De drie onderdelen van jouw ervaring">
+              <div className="phone-showcase" role="list" aria-label="Drie Wuwai-appschermen">
                 {channels.map((channel) => {
                   const isActive = activeChannel === channel.id;
                   return (
                     <button
                       key={channel.id}
-                      className={`channel ${isActive ? "is-active" : ""}`}
+                      className={`phone-card phone-${channel.id} ${isActive ? "is-active" : ""}`}
                       type="button"
                       onClick={() => setActiveChannel(channel.id)}
                       onPointerEnter={() => setActiveChannel(channel.id)}
                       aria-pressed={isActive}
                       style={{ "--channel-color": channel.color } as CSSProperties}
                     >
-                      <span className="channel-number">{channel.number}</span>
-                      <img src={channel.icon} alt="" aria-hidden="true" />
-                      <span className="channel-text">
+                      <span className="phone-frame">
+                        <span className="phone-speaker" aria-hidden="true" />
+                        <img src={channel.screenshot} alt={channel.imageAlt} />
+                      </span>
+                      <span className="phone-label">
+                        <span>{channel.number}</span>
                         <strong>{channel.title}</strong>
-                        <span>{channel.copy}</span>
                       </span>
                     </button>
                   );
                 })}
               </div>
+              <p className="active-channel-copy">
+                {channels.find((channel) => channel.id === activeChannel)?.copy}
+              </p>
             </div>
           </div>
 
@@ -251,7 +237,7 @@ export default function Home() {
             <div className="result-copy reveal">
               <p className="step-eyebrow"><span>03</span> Ervaar het resultaat</p>
               <h2>Meer energie.<br />Meer rust.<br />Meer flow.</h2>
-              <p className="lead">Voel je vrijer. Vertrouw op jezelf. Neem de regie terug.</p>
+              <p className="lead">Ervaar meer vrijheid, zelfvertrouwen en geef leiding aan je leven.</p>
               <p className="supporting-copy">
                 Versterk je gezondheid, ontdek je levensenergie en geef richting aan wat voor jou betekenis heeft.
               </p>
@@ -261,6 +247,17 @@ export default function Home() {
               <div className="be-you-rings" aria-hidden="true">
                 <span /><span /><span />
               </div>
+              <div className="polaroid-cluster" aria-label="Mensen in verschillende levensfasen">
+                <figure className="polaroid polaroid-child">
+                  <img src="/polaroid-child.jpg" alt="Portret van een kind in warm daglicht" />
+                </figure>
+                <figure className="polaroid polaroid-elder">
+                  <img src="/polaroid-elder.jpg" alt="Portret van een oudere vrouw" />
+                </figure>
+                <figure className="polaroid polaroid-adult">
+                  <img src="/polaroid-michael.jpg" alt="Portret van een volwassen man" />
+                </figure>
+              </div>
               <img className="be-you-mark" src="/be-you.svg" alt="Be You" />
 
               <details
@@ -268,7 +265,7 @@ export default function Home() {
                 open={formStatus === "error" || formStatus === "success" ? true : undefined}
               >
                 <summary>
-                  <span>Let&apos;s go</span>
+                  <span>Ontdek de app</span>
                   <i aria-hidden="true">→</i>
                 </summary>
 
