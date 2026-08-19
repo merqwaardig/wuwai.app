@@ -6,7 +6,7 @@ brand
 
 ## Product purpose
 
-Wuwai helpt mensen losse signalen uit lichaam, geest en ziel samen te brengen. De landingpage beweegt van herkenning naar inzicht, natuurlijk ritme, bewuste keuzes en uiteindelijk Be | You: dichter komen bij wie je eigenlijk bent.
+Wuwai helpt mensen eigenaarschap nemen over hun leven, energie en tijd. De V2-landingpage beweegt in drie schermen van inspiratie, via een persoonlijke ervaring met doelen, lichaamswijsheid en coaching, naar het voelbare resultaat: Be | You.
 
 ## Audience
 
@@ -18,8 +18,8 @@ Warm, helder en menselijk. Niet belerend, niet medisch claimend en niet zweverig
 
 ## Strategic principles
 
-- Eerst herkenning, daarna uitleg.
-- Eén dominante gedachte per scherm.
+- Begin bij eigenaarschap, niet bij klachten.
+- Drie schermen, elk met één dominante beweging: kiezen, ervaren, worden.
 - Liefde en verbinding vormen het hart van het verhaal.
 - Wuwai is het merk en de methode; Be | You is de bestemming.
 - Motion ondersteunt rust, betekenis en voortgang. Geen effect om het effect.
