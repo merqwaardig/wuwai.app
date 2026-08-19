@@ -14,6 +14,8 @@ const steps = [
   { id: "resultaat", label: "Resultaat", color: "var(--crown)" },
 ];
 
+const headlineWords = ["tijd", "energie", "leven"];
+
 const channels = [
   {
     id: "doelen",
@@ -52,6 +54,7 @@ function DownArrow({ href, label }: { href: string; label: string }) {
 export default function Home() {
   const [activeStep, setActiveStep] = useState(0);
   const [activeChannel, setActiveChannel] = useState("lichaam");
+  const [headlineIndex, setHeadlineIndex] = useState(0);
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   useEffect(() => {
@@ -70,6 +73,17 @@ export default function Home() {
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reducedMotion.matches) return;
+
+    const interval = window.setInterval(() => {
+      setHeadlineIndex((current) => (current + 1) % headlineWords.length);
+    }, 3200);
+
+    return () => window.clearInterval(interval);
   }, []);
 
   const moveEnergy = (event: ReactPointerEvent<HTMLElement>) => {
@@ -141,10 +155,20 @@ export default function Home() {
           <div className="v2-inner ownership-layout">
             <div className="ownership-copy reveal">
               <p className="step-eyebrow"><span>01</span> Eigenaarschap &amp; inspiratie</p>
-              <h1>Jouw leven.<br />Jouw energie.<br />Jouw tijd.</h1>
-              <p className="lead">Jij bepaalt wat je uit je leven haalt.</p>
-              <p className="supporting-copy">
-                Ontdek wat jouw lichaam je vertelt en maak keuzes die echt bij je passen.
+              <h1 className="rotating-headline" aria-label="Jouw tijd. Jouw energie. Jouw leven.">
+                <span className="headline-static">Jouw</span>
+                <span className="headline-window" aria-hidden="true">
+                  <span className="headline-measure">energie.</span>
+                  {headlineWords.map((word, index) => {
+                    const previousIndex = (headlineIndex - 1 + headlineWords.length) % headlineWords.length;
+                    const state = index === headlineIndex ? "is-current" : index === previousIndex ? "is-previous" : "is-next";
+                    return <span key={word} className={`headline-word ${state}`}>{word}.</span>;
+                  })}
+                </span>
+              </h1>
+              <p className="hero-subline">
+                <strong>Jij bepaalt wat je uit je leven haalt.</strong>
+                <span>Ontdek wat jouw lichaam je vertelt en maak keuzes die echt bij je passen.</span>
               </p>
               <a className="primary-action" href="#ervaring">
                 Start je ervaring hier
@@ -152,7 +176,7 @@ export default function Home() {
               </a>
             </div>
 
-            <div className="self-field reveal reveal-late" aria-label="Jij staat centraal in jouw leven, energie en tijd">
+            <div className="self-field hero-main-visual" aria-label="Jij staat centraal in jouw tijd, energie en leven">
               <div className="self-aura" aria-hidden="true" />
               <div className="self-ring self-ring-outer" aria-hidden="true" />
               <div className="self-ring self-ring-middle" aria-hidden="true" />

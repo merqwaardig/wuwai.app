@@ -7,9 +7,18 @@ const styles = await readFile(new URL("../app/globals.css", import.meta.url), "u
 
 test("contains the complete three-step Wuwai V2 experience", () => {
   assert.equal((page.match(/className="v2-section/g) ?? []).length, 3);
-  assert.match(page, /Jouw leven\.<br \/>Jouw energie\.<br \/>Jouw tijd\./);
+  assert.match(page, /const headlineWords = \["tijd", "energie", "leven"\]/);
+  assert.match(page, /aria-label="Jouw tijd\. Jouw energie\. Jouw leven\."/);
   assert.match(page, /Alles wat je nodig hebt om bewust in beweging te komen\./);
   assert.match(page, /Meer energie\.<br \/>Meer rust\.<br \/>Meer flow\./);
+});
+
+test("animates the ownership headline without compromising accessibility", () => {
+  assert.match(page, /setInterval/);
+  assert.match(page, /3200/);
+  assert.match(page, /prefers-reduced-motion: reduce/);
+  assert.match(page, /headline-word/);
+  assert.match(page, /Jij bepaalt wat je uit je leven haalt\./);
 });
 
 test("keeps the three-step navigation and progression intact", () => {
