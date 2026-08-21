@@ -1385,24 +1385,14 @@ h2 {
   letter-spacing: 0.09em;
   text-transform: uppercase;
   transform: translateX(-50%);
-  transition: transform 350ms var(--ease-out), background 250ms ease;
-}
-
-.app-login-action::before {
-  content: "";
-  position: absolute;
-  inset: -6px;
-  border: 2px solid oklch(0.64 0.15 147 / 0.38);
-  border-radius: 24px;
-  opacity: 0;
-  transform: scale(0.96);
-  pointer-events: none;
+  transition: transform 350ms var(--ease-out), background 250ms ease, box-shadow 350ms ease;
   animation: app-action-pulse 2.8s var(--ease-out) infinite;
 }
 
 .app-login-action:hover {
   background: var(--action-gradient-hover);
   transform: translateX(-50%) translateY(-3px);
+  animation-play-state: paused;
 }
 
 .app-login-action i {
@@ -1481,9 +1471,20 @@ h2 {
 }
 
 @keyframes app-action-pulse {
-  0%, 46% { opacity: 0; transform: scale(0.96); }
-  58% { opacity: 0.42; }
-  100% { opacity: 0; transform: scale(1.14); }
+  0%, 56%, 100% {
+    transform: translateX(-50%) scale(1);
+    box-shadow:
+      0 6px 16px color-mix(in srgb, #3e9b6c 28%, transparent),
+      0 20px 46px oklch(0.5 0.12 151 / 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  }
+  68% {
+    transform: translateX(-50%) scale(1.025);
+    box-shadow:
+      0 10px 24px color-mix(in srgb, #3e9b6c 36%, transparent),
+      0 24px 54px oklch(0.5 0.12 151 / 0.24),
+      inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  }
 }
 
 @keyframes typing-caret {
