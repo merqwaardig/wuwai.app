@@ -20,7 +20,7 @@ test("animates the ownership headline without compromising accessibility", () =>
   assert.match(page, /prefers-reduced-motion: reduce/);
   assert.match(page, /headline-word/);
   assert.match(page, /Jij bepaalt wat je uit je leven haalt\./);
-  assert.match(styles, /hero-spatial-drift 18s/);
+  assert.match(styles, /hero-spatial-zoom 18s/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
 });
 
@@ -67,12 +67,14 @@ test("uses the supplied fullscreen hero image", () => {
   assert.match(page, /fetchPriority="high"/);
   assert.match(styles, /\.hero-background/);
   assert.match(styles, /object-fit: cover/);
-  assert.match(styles, /transform: scaleX\(-1\) scale\(1\.035\)/);
+  assert.match(styles, /transform: scaleX\(-1\)/);
+  assert.match(styles, /to \{ scale: 1\.075; \}/);
   assert.match(styles, /background: oklch\(0\.1 0\.01 80 \/ 0\.1\)/);
 });
 
 test("uses the Wuwai mark as the browser and saved-site icon", async () => {
   const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
+  assert.match(html, /<title>Wuwai \| Jouw tijd\. Jouw energie\. Jouw leven\.<\/title>/);
   assert.match(html, /rel="icon"[^>]+wuwai-logo\.png/);
   assert.match(html, /rel="apple-touch-icon"[^>]+wuwai-logo\.png/);
   assert.match(html, /rel="manifest" href="\/site\.webmanifest"/);

@@ -350,10 +350,13 @@ h2 {
   z-index: 0;
   object-fit: cover;
   object-position: center center;
-  will-change: transform;
+  opacity: 0;
+  transform: scaleX(-1);
+  scale: 1.035;
+  will-change: opacity, scale;
   animation:
-    hero-image-in 1.6s var(--ease-out) both,
-    hero-spatial-drift 18s 1.6s ease-in-out infinite alternate;
+    hero-image-fade 1.2s var(--ease-out) forwards,
+    hero-spatial-zoom 18s 1.2s ease-in-out infinite alternate;
 }
 
 .hero-image-overlay {
@@ -1418,14 +1421,13 @@ h2 {
   }
 }
 
-@keyframes hero-image-in {
-  from { opacity: 0; transform: scaleX(-1) scale(1.06); }
-  to { opacity: 1; transform: scaleX(-1) scale(1.035); }
+@keyframes hero-image-fade {
+  to { opacity: 1; }
 }
 
-@keyframes hero-spatial-drift {
-  from { transform: scaleX(-1) scale(1.035) translate3d(-0.7%, -0.25%, 0); }
-  to { transform: scaleX(-1) scale(1.075) translate3d(0.7%, 0.35%, 0); }
+@keyframes hero-spatial-zoom {
+  from { scale: 1.035; }
+  to { scale: 1.075; }
 }
 
 @keyframes result-line-in {
@@ -1915,7 +1917,9 @@ h2 {
 
   .hero-background {
     animation: none;
-    transform: scaleX(-1) scale(1.035);
+    opacity: 1;
+    transform: scaleX(-1);
+    scale: 1.035;
   }
 
   .result-line {
