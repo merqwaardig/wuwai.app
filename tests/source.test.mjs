@@ -46,6 +46,11 @@ test("includes goals, body and coach as one personal experience", () => {
   assert.match(page, /\/app-doelen\.png/);
   assert.match(page, /\/app-lichaam\.png/);
   assert.match(page, /\/app-coach\.png/);
+  assert.match(page, /const mobileViewport = window\.matchMedia\("\(max-width: 820px\)"\)/);
+  assert.match(page, /3400/);
+  assert.match(page, /setActiveChannel\(\(current\) =>/);
+  assert.match(styles, /translateX\(-80%\) rotate\(-6deg\) scale\(0\.87\)/);
+  assert.match(styles, /translateX\(80%\) rotate\(6deg\) scale\(0\.87\)/);
 });
 
 test("retains Be You and links into the Wuwai app", () => {
@@ -93,6 +98,8 @@ test("remains screen-led, responsive and motion-conscious", () => {
   assert.match(styles, /min-height: 100svh/);
   assert.match(styles, /scroll-snap-type: y proximity/);
   assert.match(styles, /@media \(max-width: 820px\)/);
+  assert.match(styles, /min-height: 44px/);
+  assert.match(styles, /font-size: 12px/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(styles, /scroll-margin-top: 0/);
   assert.match(styles, /object-fit: contain/);

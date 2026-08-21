@@ -1500,12 +1500,28 @@ h2 {
   }
 
   .step-nav {
+    height: 100%;
     gap: 8px;
   }
 
   .step-nav a {
-    grid-template-columns: auto 18px;
+    min-height: 44px;
+    grid-template-columns: auto 20px;
+    align-self: center;
     gap: 5px;
+    padding: 0 2px;
+    font-size: 12px;
+    line-height: 1;
+  }
+
+  .step-nav a.is-active {
+    transform: none;
+  }
+
+  .step-nav a > span {
+    display: flex;
+    align-items: center;
+    line-height: 1;
   }
 
   .step-nav strong {
@@ -1517,7 +1533,16 @@ h2 {
   }
 
   .step-nav a > i {
-    width: 18px;
+    width: 20px;
+  }
+
+  .step-nav a > i::after {
+    width: 8px;
+    height: 8px;
+  }
+
+  .step-nav a.is-active > i::after {
+    left: calc(100% - 8px);
   }
 
   .header-action {
@@ -1603,19 +1628,19 @@ h2 {
   }
 
   .phone-doelen {
-    transform: translateX(-57%) rotate(-6deg) scale(0.87);
+    transform: translateX(-80%) rotate(-6deg) scale(0.87);
   }
 
   .phone-coach {
-    transform: translateX(57%) rotate(6deg) scale(0.87);
+    transform: translateX(80%) rotate(6deg) scale(0.87);
   }
 
   .phone-doelen.is-active {
-    transform: translateX(-50%) rotate(-2deg) scale(0.96);
+    transform: translateX(-64%) rotate(-2deg) scale(0.98);
   }
 
   .phone-coach.is-active {
-    transform: translateX(50%) rotate(2deg) scale(0.96);
+    transform: translateX(64%) rotate(2deg) scale(0.98);
   }
 
   .active-channel-copy {

@@ -118,6 +118,23 @@ export default function Home() {
     return () => window.clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (activeStep !== 1) return;
+
+    const mobileViewport = window.matchMedia("(max-width: 820px)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (!mobileViewport.matches || reducedMotion.matches) return;
+
+    const interval = window.setInterval(() => {
+      setActiveChannel((current) => {
+        const currentIndex = channels.findIndex((channel) => channel.id === current);
+        return channels[(currentIndex + 1) % channels.length].id;
+      });
+    }, 3400);
+
+    return () => window.clearInterval(interval);
+  }, [activeStep]);
+
   const moveEnergy = (event: ReactPointerEvent<HTMLElement>) => {
     const bounds = event.currentTarget.getBoundingClientRect();
     event.currentTarget.style.setProperty("--pointer-x", `${event.clientX - bounds.left}px`);
