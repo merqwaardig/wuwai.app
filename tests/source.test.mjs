@@ -49,8 +49,10 @@ test("includes goals, body and coach as one personal experience", () => {
   assert.match(page, /const mobileViewport = window\.matchMedia\("\(max-width: 820px\)"\)/);
   assert.match(page, /3400/);
   assert.match(page, /setActiveChannel\(\(current\) =>/);
-  assert.match(styles, /translateX\(-80%\) rotate\(-6deg\) scale\(0\.87\)/);
-  assert.match(styles, /translateX\(80%\) rotate\(6deg\) scale\(0\.87\)/);
+  assert.match(page, /phone-position-\$\{carouselPosition\}/);
+  assert.match(styles, /phone-position-center/);
+  assert.match(styles, /blur\(0\.7px\)/);
+  assert.match(styles, /translateY\(5px\)/);
 });
 
 test("retains Be You and links into the Wuwai app", () => {

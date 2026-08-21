@@ -1616,6 +1616,7 @@ h2 {
 
   .phone-showcase {
     min-height: 320px;
+    transform: translateY(5px);
   }
 
   .phone-card {
@@ -1641,6 +1642,28 @@ h2 {
 
   .phone-coach.is-active {
     transform: translateX(64%) rotate(2deg) scale(0.98);
+  }
+
+  .phone-card.phone-position-left,
+  .phone-card.phone-position-right {
+    z-index: 1;
+    opacity: 0.8;
+    filter: blur(0.7px) saturate(0.86) brightness(1.03);
+  }
+
+  .phone-card.phone-position-left {
+    transform: translateX(-82%) translateY(9px) rotate(0deg) scale(0.88);
+  }
+
+  .phone-card.phone-position-right {
+    transform: translateX(82%) translateY(9px) rotate(0deg) scale(0.88);
+  }
+
+  .phone-card.phone-position-center {
+    z-index: 5;
+    opacity: 1;
+    filter: none;
+    transform: translateY(-12px) rotate(0deg) scale(1.04);
   }
 
   .active-channel-copy {

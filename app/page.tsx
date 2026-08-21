@@ -57,6 +57,7 @@ function DownArrow({ href, label }: { href: string; label: string }) {
 export default function Home() {
   const [activeStep, setActiveStep] = useState(0);
   const [activeChannel, setActiveChannel] = useState("lichaam");
+  const activeChannelIndex = channels.findIndex((channel) => channel.id === activeChannel);
   const [headlineIndex, setHeadlineIndex] = useState(0);
   const [resultLeadLength, setResultLeadLength] = useState(0);
 
@@ -225,12 +226,14 @@ export default function Home() {
 
             <div className="channel-experience reveal reveal-late">
               <div className="phone-showcase" role="list" aria-label="Drie Wuwai-appschermen">
-                {channels.map((channel) => {
+                {channels.map((channel, channelIndex) => {
                   const isActive = activeChannel === channel.id;
+                  const relativePosition = (channelIndex - activeChannelIndex + channels.length) % channels.length;
+                  const carouselPosition = relativePosition === 0 ? "center" : relativePosition === 1 ? "right" : "left";
                   return (
                     <button
                       key={channel.id}
-                      className={`phone-card phone-${channel.id} ${isActive ? "is-active" : ""}`}
+                      className={`phone-card phone-${channel.id} phone-position-${carouselPosition} ${isActive ? "is-active" : ""}`}
                       type="button"
                       onClick={() => setActiveChannel(channel.id)}
                       onPointerEnter={() => setActiveChannel(channel.id)}
