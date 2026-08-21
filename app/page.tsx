@@ -125,7 +125,14 @@ export default function Home() {
           className="v2-section ownership-section is-visible"
           onPointerMove={moveEnergy}
         >
-          <img className="hero-background" src="/hero-v2.png" alt="" aria-hidden="true" />
+          <img
+            className="hero-background"
+            src="/hero-charge.webp"
+            alt=""
+            aria-hidden="true"
+            decoding="async"
+            fetchPriority="high"
+          />
           <div className="hero-image-overlay" aria-hidden="true" />
 
           <div className="v2-inner ownership-layout">

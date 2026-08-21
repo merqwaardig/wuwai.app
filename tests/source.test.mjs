@@ -56,7 +56,9 @@ test("retains Be You and links into the Wuwai app", () => {
 });
 
 test("uses the supplied fullscreen hero image", () => {
-  assert.match(page, /className="hero-background" src="\/hero-v2\.png"/);
+  assert.match(page, /className="hero-background"/);
+  assert.match(page, /src="\/hero-charge\.webp"/);
+  assert.match(page, /fetchPriority="high"/);
   assert.match(styles, /\.hero-background/);
   assert.match(styles, /object-fit: cover/);
 });
