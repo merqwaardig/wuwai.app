@@ -161,7 +161,7 @@ export default function Home() {
           <div className="experience-spectrum" aria-hidden="true" />
           <div className="v2-inner experience-layout">
             <div className="experience-copy reveal">
-              <p className="step-eyebrow"><span>02</span> Ervaar hoe het werkt</p>
+              <p className="step-eyebrow"><span>02</span> Hoe het werkt</p>
               <h2>Alles wat je nodig hebt om bewust in beweging te komen.</h2>
               <p className="experience-summary">
                 Doelen, lichaamswijsheid en coaching komen samen in één persoonlijke ervaring.

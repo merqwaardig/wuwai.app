@@ -216,7 +216,7 @@ h2 {
   align-items: center;
   padding: calc(var(--header-height) + 44px) clamp(20px, 4vw, 64px) 54px;
   isolation: isolate;
-  scroll-margin-top: var(--header-height);
+  scroll-margin-top: 0;
   scroll-snap-align: start;
   overflow: hidden;
 }
@@ -652,7 +652,10 @@ h2 {
 
 /* Step 2 */
 .experience-section {
-  background: oklch(0.95 0.014 145);
+  background:
+    radial-gradient(circle at 82% 35%, oklch(0.94 0.035 225 / 0.56), transparent 34%),
+    radial-gradient(circle at 56% 86%, oklch(0.96 0.04 104 / 0.42), transparent 32%),
+    linear-gradient(145deg, oklch(0.995 0.004 100), oklch(0.975 0.01 155));
 }
 
 .experience-spectrum {
@@ -665,9 +668,9 @@ h2 {
   border-radius: 50%;
   background:
     conic-gradient(from 210deg, oklch(0.84 0.15 91 / 0.14), oklch(0.68 0.15 147 / 0.15), oklch(0.64 0.15 242 / 0.14), oklch(0.62 0.16 305 / 0.1), oklch(0.84 0.15 91 / 0.14));
-  filter: blur(42px);
+  filter: blur(68px);
   transform: translateY(-50%);
-  opacity: 0.8;
+  opacity: 0.46;
   animation: reverse-spin 32s linear infinite;
 }
 
@@ -687,7 +690,7 @@ h2 {
 .experience-summary {
   max-width: 42ch;
   margin: 30px 0 0;
-  color: var(--green-dark);
+  color: var(--ink);
   font-size: clamp(1.05rem, 1.35vw, 1.28rem);
   font-weight: 700;
   line-height: 1.5;
@@ -872,28 +875,34 @@ h2 {
   display: block;
   aspect-ratio: 1170 / 2532;
   overflow: hidden;
-  border: 7px solid oklch(0.2 0.01 150);
+  border: 5px solid oklch(0.93 0.007 105);
   border-radius: 34px;
-  background: var(--surface);
-  box-shadow: 0 28px 64px oklch(0.25 0.03 150 / 0.24);
+  background: oklch(0.992 0.003 100);
+  box-shadow:
+    inset 0 0 0 1px oklch(0.45 0.02 150 / 0.2),
+    inset 0 1px 0 oklch(1 0 0 / 0.9),
+    0 28px 64px oklch(0.32 0.035 150 / 0.16);
 }
 
 .phone-frame img {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center top;
+  background: oklch(0.992 0.003 100);
 }
 
 .phone-speaker {
   position: absolute;
   z-index: 2;
-  top: 7px;
+  top: 8px;
   left: 50%;
-  width: 34%;
-  height: 13px;
+  width: 27%;
+  height: 9px;
   border-radius: 999px;
-  background: oklch(0.2 0.01 150);
+  background: oklch(0.36 0.012 150 / 0.8);
+  box-shadow: 0 0 0 2px oklch(0.99 0.003 100 / 0.82);
   transform: translateX(-50%);
 }
 
@@ -934,7 +943,7 @@ h2 {
 }
 
 .phone-card:not(.is-active) {
-  filter: saturate(0.7) brightness(0.98);
+  filter: saturate(0.82) brightness(1.01);
 }
 
 .phone-doelen.is-active {
@@ -1050,10 +1059,13 @@ h2 {
 }
 
 .be-you-mark {
-  position: relative;
+  position: absolute;
   z-index: 4;
+  top: 46%;
+  left: 50%;
   width: min(32%, 160px);
-  margin-bottom: 108px;
+  margin: 0;
+  transform: translate(-50%, -50%);
   filter: drop-shadow(0 20px 40px oklch(0.4 0.04 150 / 0.12));
 }
 
@@ -1251,8 +1263,10 @@ h2 {
 }
 
 .app-login-action {
-  position: relative;
+  position: absolute;
   z-index: 5;
+  bottom: 4%;
+  left: 50%;
   width: min(100%, 250px);
   min-height: 64px;
   display: flex;
@@ -1268,12 +1282,13 @@ h2 {
   font-weight: 800;
   letter-spacing: 0.09em;
   text-transform: uppercase;
+  transform: translateX(-50%);
   transition: transform 350ms var(--ease-out), background 250ms ease;
 }
 
 .app-login-action:hover {
   background: var(--green-dark);
-  transform: translateY(-3px);
+  transform: translateX(-50%) translateY(-3px);
 }
 
 .app-login-action i {
@@ -1464,30 +1479,30 @@ h2 {
   }
 
   .experience-copy h2 {
-    max-width: 14ch;
-    font-size: clamp(2.55rem, 10vw, 4.2rem);
+    max-width: 18ch;
+    font-size: clamp(2.35rem, 7vw, 3.6rem);
   }
 
   .experience-summary {
     max-width: 46ch;
-    margin-top: 18px;
+    margin-top: 14px;
   }
 
   .channel-experience {
-    min-height: 430px;
+    min-height: 370px;
     grid-template-columns: 1fr;
   }
 
   .phone-showcase {
-    min-height: 370px;
+    min-height: 320px;
   }
 
   .phone-card {
-    width: clamp(145px, 37vw, 182px);
+    width: clamp(132px, 19vw, 150px);
   }
 
   .phone-frame {
-    border-width: 6px;
+    border-width: 4px;
     border-radius: 28px;
   }
 
@@ -1569,7 +1584,7 @@ h2 {
 
   .be-you-mark {
     width: min(30%, 132px);
-    margin-bottom: 92px;
+    margin: 0;
   }
 
   .polaroid-cluster {
@@ -1659,11 +1674,12 @@ h2 {
   }
 
   .experience-section {
-    align-items: flex-start;
+    align-items: center;
   }
 
   .experience-copy h2 {
-    font-size: clamp(2.28rem, 10.5vw, 3.2rem);
+    max-width: 17ch;
+    font-size: clamp(2.05rem, 8.7vw, 2.8rem);
     line-height: 0.98;
   }
 
@@ -1677,15 +1693,15 @@ h2 {
   }
 
   .channel-experience {
-    min-height: 355px;
+    min-height: 315px;
   }
 
   .phone-showcase {
-    min-height: 300px;
+    min-height: 270px;
   }
 
   .phone-card {
-    width: clamp(132px, 39vw, 158px);
+    width: clamp(112px, 31vw, 126px);
   }
 
   .phone-label {
@@ -1727,7 +1743,7 @@ h2 {
 
   .be-you-mark {
     width: min(29%, 112px);
-    margin-bottom: 78px;
+    margin: 0;
   }
 
   .polaroid-cluster {
@@ -1741,6 +1757,7 @@ h2 {
   }
 
   .app-login-action {
+    bottom: 0;
     min-height: 54px;
   }
 

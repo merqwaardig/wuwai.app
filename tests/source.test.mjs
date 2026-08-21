@@ -10,6 +10,7 @@ test("contains the complete three-step Wuwai V2 experience", () => {
   assert.match(page, /const headlineWords = \["tijd", "energie", "leven"\]/);
   assert.match(page, /aria-label="Jouw tijd\. Jouw energie\. Jouw leven\."/);
   assert.match(page, /Alles wat je nodig hebt om bewust in beweging te komen\./);
+  assert.match(page, /<span>02<\/span> Hoe het werkt/);
   assert.match(page, /Meer balans\.<br \/>Meer energie\.<br \/>Meer flow\./);
 });
 
@@ -65,4 +66,6 @@ test("remains screen-led, responsive and motion-conscious", () => {
   assert.match(styles, /scroll-snap-type: y proximity/);
   assert.match(styles, /@media \(max-width: 820px\)/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(styles, /scroll-margin-top: 0/);
+  assert.match(styles, /object-fit: contain/);
 });
