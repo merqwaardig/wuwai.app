@@ -75,6 +75,8 @@ test("retains Be You and links into the Wuwai app", () => {
   assert.match(styles, /bottom: 10px/);
   assert.match(styles, /app-action-pulse 2\.8s/);
   assert.match(styles, /@keyframes app-action-pulse/);
+  assert.match(styles, /primary-action-pulse 2\.8s/);
+  assert.match(styles, /@keyframes primary-action-pulse/);
   assert.match(styles, /translateX\(-50%\) scale\(1\.025\)/);
   assert.doesNotMatch(styles, /\.app-login-action::before/);
   assert.match(page, /<span>03<\/span> Resultaat/);

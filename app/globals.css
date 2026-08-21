@@ -516,6 +516,7 @@ h2 {
     inset 0 1px 0 rgba(255, 255, 255, 0.22);
   font-weight: 750;
   transition: transform 350ms var(--ease-out), box-shadow 350ms ease;
+  animation: primary-action-pulse 2.8s var(--ease-out) infinite;
 }
 
 .primary-action span {
@@ -531,6 +532,7 @@ h2 {
   background: var(--action-gradient-hover);
   transform: translateY(-3px);
   box-shadow: 0 22px 48px oklch(0.5 0.12 151 / 0.28);
+  animation-play-state: paused;
 }
 
 .self-field {
@@ -1483,6 +1485,23 @@ h2 {
     box-shadow:
       0 10px 24px color-mix(in srgb, #3e9b6c 36%, transparent),
       0 24px 54px oklch(0.5 0.12 151 / 0.24),
+      inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  }
+}
+
+@keyframes primary-action-pulse {
+  0%, 56%, 100% {
+    transform: scale(1);
+    box-shadow:
+      0 6px 16px color-mix(in srgb, #3e9b6c 28%, transparent),
+      0 18px 42px oklch(0.5 0.12 151 / 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  }
+  68% {
+    transform: scale(1.025);
+    box-shadow:
+      0 10px 24px color-mix(in srgb, #3e9b6c 36%, transparent),
+      0 22px 50px oklch(0.5 0.12 151 / 0.22),
       inset 0 1px 0 rgba(255, 255, 255, 0.28);
   }
 }
