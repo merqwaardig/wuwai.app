@@ -11,7 +11,7 @@ test("contains the complete three-step Wuwai V2 experience", () => {
   assert.match(page, /aria-label="Jouw tijd\. Jouw energie\. Jouw leven\."/);
   assert.match(page, /Alles wat je nodig hebt om bewust in beweging te komen\./);
   assert.match(page, /<span>02<\/span> Doelgericht/);
-  assert.match(page, /Meer balans\.<br \/>Meer energie\.<br \/>Meer flow\./);
+  assert.match(page, /aria-label="Meer balans\. Meer energie\. Meer flow\."/);
 });
 
 test("animates the ownership headline without compromising accessibility", () => {
@@ -20,6 +20,8 @@ test("animates the ownership headline without compromising accessibility", () =>
   assert.match(page, /prefers-reduced-motion: reduce/);
   assert.match(page, /headline-word/);
   assert.match(page, /Jij bepaalt wat je uit je leven haalt\./);
+  assert.match(styles, /hero-spatial-drift 18s/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
 });
 
 test("keeps the three-step navigation and progression intact", () => {
@@ -52,6 +54,8 @@ test("retains Be You and links into the Wuwai app", () => {
   assert.match(page, />Aanmelden<\/a>/);
   assert.match(page, /Ontdek de app/);
   assert.match(page, /Ervaar meer vrijheid, zelfvertrouwen en geef leiding aan je leven\./);
+  assert.match(page, /resultLead\.slice\(0, resultLeadLength\)/);
+  assert.match(styles, /result-line-in 680ms/);
   assert.match(page, /<span>03<\/span> Resultaat/);
   assert.equal((page.match(/className="polaroid polaroid-/g) ?? []).length, 2);
   assert.doesNotMatch(page, /polaroid-michael/);
@@ -63,7 +67,7 @@ test("uses the supplied fullscreen hero image", () => {
   assert.match(page, /fetchPriority="high"/);
   assert.match(styles, /\.hero-background/);
   assert.match(styles, /object-fit: cover/);
-  assert.match(styles, /transform: scaleX\(-1\) scale\(1\)/);
+  assert.match(styles, /transform: scaleX\(-1\) scale\(1\.035\)/);
   assert.match(styles, /background: oklch\(0\.1 0\.01 80 \/ 0\.1\)/);
 });
 

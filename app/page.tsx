@@ -14,6 +14,7 @@ const steps = [
 ];
 
 const headlineWords = ["tijd", "energie", "leven"];
+const resultLead = "Ervaar meer vrijheid, zelfvertrouwen en geef leiding aan je leven.";
 
 const channels = [
   {
@@ -57,6 +58,7 @@ export default function Home() {
   const [activeStep, setActiveStep] = useState(0);
   const [activeChannel, setActiveChannel] = useState("lichaam");
   const [headlineIndex, setHeadlineIndex] = useState(0);
+  const [resultLeadLength, setResultLeadLength] = useState(0);
 
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>(".v2-section"));
@@ -75,6 +77,35 @@ export default function Home() {
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (activeStep !== 2) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reducedMotion.matches) {
+      setResultLeadLength(resultLead.length);
+      return;
+    }
+
+    setResultLeadLength(0);
+    let typingInterval = 0;
+    const startTyping = window.setTimeout(() => {
+      typingInterval = window.setInterval(() => {
+        setResultLeadLength((current) => {
+          if (current >= resultLead.length) {
+            window.clearInterval(typingInterval);
+            return current;
+          }
+          return current + 1;
+        });
+      }, 28);
+    }, 1150);
+
+    return () => {
+      window.clearTimeout(startTyping);
+      window.clearInterval(typingInterval);
+    };
+  }, [activeStep]);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -212,8 +243,20 @@ export default function Home() {
           <div className="v2-inner result-layout">
             <div className="result-copy reveal">
               <p className="step-eyebrow"><span>03</span> Resultaat</p>
-              <h2>Meer balans.<br />Meer energie.<br />Meer flow.</h2>
-              <p className="lead">Ervaar meer vrijheid, zelfvertrouwen en geef leiding aan je leven.</p>
+              <h2 className="result-headline" aria-label="Meer balans. Meer energie. Meer flow.">
+                {["Meer balans.", "Meer energie.", "Meer flow."].map((line) => (
+                  <span className="result-line-mask" key={line} aria-hidden="true">
+                    <span className="result-line">{line}</span>
+                  </span>
+                ))}
+              </h2>
+              <p className="lead result-typed-copy" aria-label={resultLead}>
+                <span className="result-typed-measure" aria-hidden="true">{resultLead}</span>
+                <span className="result-typed-text" aria-hidden="true">
+                  {resultLead.slice(0, resultLeadLength)}
+                  <i className={resultLeadLength === resultLead.length ? "is-complete" : ""} />
+                </span>
+              </p>
             </div>
 
             <div className="be-you-destination reveal reveal-late">
