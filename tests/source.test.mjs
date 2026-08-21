@@ -74,6 +74,7 @@ test("uses the supplied fullscreen hero image", () => {
   assert.match(page, /src="\/hero-charge\.webp"/);
   assert.match(page, /fetchPriority="high"/);
   assert.match(styles, /\.hero-background/);
+  assert.match(styles, /object-position:\s*18% center/);
   assert.match(styles, /object-fit: cover/);
   assert.match(styles, /transform: scaleX\(-1\)/);
   assert.match(styles, /to \{ scale: 1\.075; \}/);
