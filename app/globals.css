@@ -334,9 +334,7 @@ h2 {
   position: absolute;
   z-index: 1;
   inset: 0;
-  background:
-    linear-gradient(90deg, oklch(0.11 0.015 80 / 0.12) 0%, oklch(0.12 0.015 80 / 0.08) 42%, oklch(0.12 0.015 80 / 0.03) 72%, transparent 100%),
-    linear-gradient(0deg, oklch(0.1 0.01 80 / 0.08) 0%, transparent 45%);
+  background: oklch(0.1 0.01 80 / 0.1);
   pointer-events: none;
 }
 
@@ -357,7 +355,7 @@ h2 {
 
 .hero-image-overlay {
   z-index: 1;
-  background: radial-gradient(circle at 75% 35%, transparent 0%, oklch(0.1 0.01 80 / 0.05) 72%);
+  background: none;
   pointer-events: none;
 }
 
@@ -409,7 +407,12 @@ h2 {
 }
 
 .ownership-section .step-eyebrow {
-  color: oklch(0.94 0.025 145 / 0.86);
+  color: oklch(0.985 0.005 90);
+}
+
+.experience-section .step-eyebrow,
+.result-section .step-eyebrow {
+  color: oklch(0.36 0.014 150);
 }
 
 .ownership-section .step-eyebrow span {
@@ -966,7 +969,7 @@ h2 {
 .active-channel-copy {
   min-height: 3.1em;
   max-width: 48ch;
-  margin: -2px auto 0;
+  margin: 3px auto 0;
   color: oklch(0.36 0.014 150);
   font-size: 14px;
   font-weight: 700;
@@ -1076,7 +1079,7 @@ h2 {
   z-index: 2;
   top: 9%;
   left: 50%;
-  width: min(100%, 560px);
+  width: min(100%, 600px);
   height: 330px;
   transform: translateX(-50%);
   pointer-events: none;
@@ -1084,7 +1087,7 @@ h2 {
 
 .polaroid {
   position: absolute;
-  width: 210px;
+  width: 230px;
   margin: 0;
   padding: 8px 8px 25px;
   background: oklch(0.992 0.004 90);
@@ -1357,8 +1360,8 @@ h2 {
 }
 
 @keyframes hero-image-in {
-  from { opacity: 0; transform: scale(1.04); }
-  to { opacity: 1; transform: scale(1); }
+  from { opacity: 0; transform: scaleX(-1) scale(1.04); }
+  to { opacity: 1; transform: scaleX(-1) scale(1); }
 }
 
 @media (max-width: 1050px) {
@@ -1651,9 +1654,7 @@ h2 {
   }
 
   .ownership-section::after {
-    background:
-      linear-gradient(90deg, oklch(0.1 0.012 80 / 0.12) 0%, oklch(0.1 0.012 80 / 0.08) 62%, oklch(0.1 0.012 80 / 0.03) 100%),
-      linear-gradient(0deg, oklch(0.08 0.01 80 / 0.08) 0%, transparent 52%);
+    background: oklch(0.1 0.01 80 / 0.1);
   }
 
   .hero-background {

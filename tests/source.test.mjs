@@ -63,6 +63,8 @@ test("uses the supplied fullscreen hero image", () => {
   assert.match(page, /fetchPriority="high"/);
   assert.match(styles, /\.hero-background/);
   assert.match(styles, /object-fit: cover/);
+  assert.match(styles, /transform: scaleX\(-1\) scale\(1\)/);
+  assert.match(styles, /background: oklch\(0\.1 0\.01 80 \/ 0\.1\)/);
 });
 
 test("uses the Wuwai mark as the browser and saved-site icon", async () => {
