@@ -99,8 +99,8 @@ export default function Home() {
           }
           return current + 1;
         });
-      }, 28);
-    }, 1150);
+      }, 32);
+    }, 2100);
 
     return () => {
       window.clearTimeout(startTyping);

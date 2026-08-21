@@ -62,10 +62,14 @@ test("retains Be You and links into the Wuwai app", () => {
   assert.match(page, /Ontdek de app/);
   assert.match(page, /Ervaar meer vrijheid, zelfvertrouwen\\nen geef leiding aan je leven\./);
   assert.match(page, /resultLead\.slice\(0, resultLeadLength\)/);
-  assert.match(styles, /result-line-in 680ms/);
+  assert.match(styles, /result-line-in 880ms/);
+  assert.match(page, /2100/);
+  assert.match(styles, /animation-delay: 1040ms/);
   assert.match(styles, /padding-bottom: 0\.14em/);
   assert.match(styles, /white-space: pre-line/);
   assert.match(styles, /top: calc\(9% \+ 10px\)/);
+  assert.match(styles, /border-radius: 18px/);
+  assert.match(styles, /bottom: 10px/);
   assert.match(page, /<span>03<\/span> Resultaat/);
   assert.equal((page.match(/className="polaroid polaroid-/g) ?? []).length, 2);
   assert.doesNotMatch(page, /polaroid-michael/);
