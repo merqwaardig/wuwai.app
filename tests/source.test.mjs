@@ -78,6 +78,12 @@ test("uses the Wuwai mark as the browser and saved-site icon", async () => {
   assert.match(html, /rel="manifest" href="\/site\.webmanifest"/);
 });
 
+test("loads the configured Google Analytics tag", async () => {
+  const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
+  assert.match(html, /googletagmanager\.com\/gtag\/js\?id=G-Z8K5W1KJRV/);
+  assert.match(html, /gtag\('config', 'G-Z8K5W1KJRV'\)/);
+});
+
 test("remains screen-led, responsive and motion-conscious", () => {
   assert.match(styles, /min-height: 100svh/);
   assert.match(styles, /scroll-snap-type: y proximity/);
