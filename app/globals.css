@@ -1033,7 +1033,9 @@ h2 {
   display: block;
   overflow: hidden;
   margin-top: -0.08em;
+  margin-bottom: -0.14em;
   padding-top: 0.08em;
+  padding-bottom: 0.14em;
 }
 
 .result-line {
@@ -1062,6 +1064,11 @@ h2 {
 
 .result-typed-measure {
   visibility: hidden;
+}
+
+.result-typed-measure,
+.result-typed-text {
+  white-space: pre-line;
 }
 
 .result-typed-text {
@@ -1139,7 +1146,7 @@ h2 {
 .polaroid-cluster {
   position: absolute;
   z-index: 2;
-  top: 9%;
+  top: calc(9% + 10px);
   left: 50%;
   width: min(100%, 600px);
   height: 330px;
@@ -1673,7 +1680,7 @@ h2 {
   }
 
   .polaroid-cluster {
-    top: 0;
+    top: 10px;
     width: min(92vw, 390px);
     height: 220px;
   }

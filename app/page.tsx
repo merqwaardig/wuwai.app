@@ -14,7 +14,7 @@ const steps = [
 ];
 
 const headlineWords = ["tijd", "energie", "leven"];
-const resultLead = "Ervaar meer vrijheid, zelfvertrouwen en geef leiding aan je leven.";
+const resultLead = "Ervaar meer vrijheid, zelfvertrouwen\nen geef leiding aan je leven.";
 
 const channels = [
   {
