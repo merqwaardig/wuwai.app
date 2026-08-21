@@ -2,16 +2,15 @@
 
 import {
   CSSProperties,
-  FormEvent,
   PointerEvent as ReactPointerEvent,
   useEffect,
   useState,
 } from "react";
 
 const steps = [
-  { id: "eigenaarschap", label: "Eigenaarschap", color: "var(--root-chakra)" },
-  { id: "ervaring", label: "Ervaring", color: "var(--heart)" },
-  { id: "resultaat", label: "Resultaat", color: "var(--crown)" },
+  { id: "eigenaarschap", label: "Persoonlijk", color: "var(--root-chakra)" },
+  { id: "ervaring", label: "Doelgericht", color: "var(--heart)" },
+  { id: "resultaat", label: "Resultaat", color: "var(--spirit)" },
 ];
 
 const headlineWords = ["tijd", "energie", "leven"];
@@ -58,7 +57,6 @@ export default function Home() {
   const [activeStep, setActiveStep] = useState(0);
   const [activeChannel, setActiveChannel] = useState("lichaam");
   const [headlineIndex, setHeadlineIndex] = useState(0);
-  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>(".v2-section"));
@@ -95,30 +93,6 @@ export default function Home() {
     event.currentTarget.style.setProperty("--pointer-y", `${event.clientY - bounds.top}px`);
   };
 
-  const submit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-    setFormStatus("submitting");
-
-    try {
-      const response = await fetch(form.action, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(Object.fromEntries(formData.entries())),
-      });
-
-      if (!response.ok) throw new Error("FormSubmit kon de aanmelding niet verwerken.");
-      form.reset();
-      setFormStatus("success");
-    } catch {
-      setFormStatus("error");
-    }
-  };
-
   return (
     <div className="v2-shell">
       <header className="v2-header">
@@ -142,7 +116,7 @@ export default function Home() {
           ))}
         </nav>
 
-        <a className="header-action" href="#resultaat">Ontdek de app</a>
+        <a className="header-action" href="https://app.wuwai.org/login">Aanmelden</a>
       </header>
 
       <main>
@@ -156,7 +130,7 @@ export default function Home() {
 
           <div className="v2-inner ownership-layout">
             <div className="ownership-copy reveal">
-              <p className="step-eyebrow"><span>01</span> Eigenaarschap &amp; inspiratie</p>
+              <p className="step-eyebrow"><span>01</span> Persoonlijk</p>
               <h1 className="rotating-headline" aria-label="Jouw tijd. Jouw energie. Jouw leven.">
                 <span className="headline-static">Jouw</span>
                 <span className="headline-window" aria-hidden="true">
@@ -173,7 +147,7 @@ export default function Home() {
                 <span>Ontdek wat jouw lichaam je vertelt en maak keuzes die echt bij je passen.</span>
               </p>
               <a className="primary-action" href="#ervaring">
-                Start je ervaring hier
+                Hoe het werkt
                 <span aria-hidden="true">↓</span>
               </a>
             </div>
@@ -212,10 +186,6 @@ export default function Home() {
                         <span className="phone-speaker" aria-hidden="true" />
                         <img src={channel.screenshot} alt={channel.imageAlt} />
                       </span>
-                      <span className="phone-label">
-                        <span>{channel.number}</span>
-                        <strong>{channel.title}</strong>
-                      </span>
                     </button>
                   );
                 })}
@@ -236,11 +206,8 @@ export default function Home() {
           <div className="v2-inner result-layout">
             <div className="result-copy reveal">
               <p className="step-eyebrow"><span>03</span> Ervaar het resultaat</p>
-              <h2>Meer energie.<br />Meer rust.<br />Meer flow.</h2>
+              <h2>Meer balans.<br />Meer energie.<br />Meer flow.</h2>
               <p className="lead">Ervaar meer vrijheid, zelfvertrouwen en geef leiding aan je leven.</p>
-              <p className="supporting-copy">
-                Versterk je gezondheid, ontdek je levensenergie en geef richting aan wat voor jou betekenis heeft.
-              </p>
             </div>
 
             <div className="be-you-destination reveal reveal-late">
@@ -254,53 +221,13 @@ export default function Home() {
                 <figure className="polaroid polaroid-elder">
                   <img src="/polaroid-elder.jpg" alt="Portret van een oudere vrouw" />
                 </figure>
-                <figure className="polaroid polaroid-adult">
-                  <img src="/polaroid-michael.jpg" alt="Portret van een volwassen man" />
-                </figure>
               </div>
               <img className="be-you-mark" src="/be-you.svg" alt="Be You" />
 
-              <details
-                className="access-panel"
-                open={formStatus === "error" || formStatus === "success" ? true : undefined}
-              >
-                <summary>
-                  <span>Ontdek de app</span>
-                  <i aria-hidden="true">→</i>
-                </summary>
-
-                <form
-                  action="https://formsubmit.co/ajax/contact@wuwai.org"
-                  method="POST"
-                  onSubmit={submit}
-                  className={formStatus === "success" ? "is-success" : ""}
-                >
-                  <input type="hidden" name="_subject" value="Nieuwe early-accessaanmelding voor Wuwai V2" />
-                  <input type="hidden" name="_template" value="table" />
-                  <input type="hidden" name="_url" value="https://www.wuwai.app/#resultaat" />
-                  <input className="form-honeypot" type="text" name="_honey" tabIndex={-1} autoComplete="off" />
-
-                  <div className="form-fields">
-                    <label>
-                      <span>Naam</span>
-                      <input type="text" name="name" placeholder="Jouw naam" autoComplete="name" required />
-                    </label>
-                    <label>
-                      <span>E-mailadres</span>
-                      <input type="email" name="email" placeholder="E-mailadres" autoComplete="email" required />
-                    </label>
-                    <button type="submit" disabled={formStatus === "submitting"}>
-                      {formStatus === "submitting" ? "Even versturen…" : "Ik doe mee"}
-                    </button>
-                  </div>
-
-                  <p className="privacy-note">Je gegevens gaan veilig via FormSubmit naar contact@wuwai.org.</p>
-                  <div className="form-feedback" aria-live="polite">
-                    {formStatus === "success" && <p className="form-success">Mooi. Je staat op de early-accesslijst.</p>}
-                    {formStatus === "error" && <p className="form-error">Dat ging niet goed. Probeer het nog een keer.</p>}
-                  </div>
-                </form>
-              </details>
+              <a className="app-login-action" href="https://app.wuwai.org/login">
+                <span>Ontdek de app</span>
+                <i aria-hidden="true">→</i>
+              </a>
             </div>
           </div>
         </section>

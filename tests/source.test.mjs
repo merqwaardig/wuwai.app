@@ -10,7 +10,7 @@ test("contains the complete three-step Wuwai V2 experience", () => {
   assert.match(page, /const headlineWords = \["tijd", "energie", "leven"\]/);
   assert.match(page, /aria-label="Jouw tijd\. Jouw energie\. Jouw leven\."/);
   assert.match(page, /Alles wat je nodig hebt om bewust in beweging te komen\./);
-  assert.match(page, /Meer energie\.<br \/>Meer rust\.<br \/>Meer flow\./);
+  assert.match(page, /Meer balans\.<br \/>Meer energie\.<br \/>Meer flow\./);
 });
 
 test("animates the ownership headline without compromising accessibility", () => {
@@ -29,6 +29,9 @@ test("keeps the three-step navigation and progression intact", () => {
 
   assert.equal((page.match(/<DownArrow/g) ?? []).length, 2);
   assert.match(page, /aria-label={`Stap \$\{activeStep \+ 1\} van 3`}/);
+  assert.match(page, /label: "Persoonlijk"/);
+  assert.match(page, /label: "Doelgericht"/);
+  assert.match(page, /color: "var\(--spirit\)"/);
 });
 
 test("includes goals, body and coach as one personal experience", () => {
@@ -41,13 +44,14 @@ test("includes goals, body and coach as one personal experience", () => {
   assert.match(page, /\/app-coach\.png/);
 });
 
-test("retains Be You and the working early-access form", () => {
+test("retains Be You and links into the Wuwai app", () => {
   assert.match(page, /src="\/be-you\.svg" alt="Be You"/);
-  assert.match(page, /https:\/\/formsubmit\.co\/ajax\/contact@wuwai\.org/);
-  assert.match(page, /name="_honey"/);
+  assert.equal((page.match(/href="https:\/\/app\.wuwai\.org\/login"/g) ?? []).length, 2);
+  assert.match(page, />Aanmelden<\/a>/);
   assert.match(page, /Ontdek de app/);
   assert.match(page, /Ervaar meer vrijheid, zelfvertrouwen en geef leiding aan je leven\./);
-  assert.equal((page.match(/className="polaroid polaroid-/g) ?? []).length, 3);
+  assert.equal((page.match(/className="polaroid polaroid-/g) ?? []).length, 2);
+  assert.doesNotMatch(page, /polaroid-michael/);
 });
 
 test("uses the supplied fullscreen hero image", () => {
