@@ -1,146 +1,153 @@
 # Wuwai landingpage handoff
 
-Laatste update: 17 augustus 2026
+Laatste update: 21 augustus 2026
 
-## Doel
+## Huidige status
 
-Wuwai helpt mensen losse signalen uit lichaam, geest en ziel samen te brengen. De landingpage beweegt van herkenning naar inzicht, natuurlijk ritme, bewuste keuzes en uiteindelijk Be You: dichter komen bij wie je eigenlijk bent.
+De nieuwe Wuwai-landingspagina met drie schermvullende stappen staat live in productie. GitHub `main` is de bron van waarheid en Vercel publiceert automatisch na een push naar `main`.
 
-De site moet warm, helder en menselijk blijven. Niet belerend, niet medisch claimend en niet zweverig. Eén dominante gedachte per scherm. Motion ondersteunt betekenis en voortgang, zonder onrust toe te voegen.
+Productie en redirects:
 
-Lees bij ontwerpwerk eerst:
-
-- `PRODUCT.md`
-- `DESIGN.md`
+- `https://www.wuwai.app`: primaire productiesite
+- `https://wuwai.app`: permanente 308-redirect naar `https://www.wuwai.app`
+- `https://www.wuwai.nl`: permanente 308-redirect naar `https://www.wuwai.app`
+- `https://wuwai.nl`: permanente 308-redirect naar `https://www.wuwai.app`
+- Alle vier domeinen tonen in Vercel `Valid Configuration`.
+- De oude testsite op `.nl` is niet meer publiek bereikbaar via `wuwai.nl` of `www.wuwai.nl`.
 
 ## Projectlocaties
 
-- Lokale projectmap: `/Users/macbook/Documents/Codex/2026-08-16/referenced-chatgpt-conversation-this-is-an/site`
+- Lokale bronmap: `/Users/macbook/Documents/Codex/2026-08-16/referenced-chatgpt-conversation-this-is-an/site`
 - GitHub: `git@github.com:merqwaardig/wuwai.app.git`
-- Branch: `main`
+- Productiebranch: `main`
 - Vercel-project: `wuwai-app`
-- Vercel-productiedomein: `https://wuwai-app.vercel.app`
-- Gewenste domeinen: `https://www.wuwai.app` en `https://wuwai.app`
+- Vercel-preview/productiedomein: `https://wuwai-app.vercel.app`
+- Publieke website: `https://www.wuwai.app`
+- Wuwai-app/login: `https://app.wuwai.org/login`
+
+## Productrichting
+
+Wuwai helpt mensen bewuster te ervaren wat lichaam, geest en ziel vertellen en dit te vertalen naar persoonlijke keuzes en beweging. De landingspagina moet warm, helder, menselijk en doelgericht blijven: niet belerend, niet medisch claimend en niet onnodig zweverig.
+
+Lees vóór grote inhoudelijke of visuele wijzigingen:
+
+- `PRODUCT.md`
+- `DESIGN.md`
+- `V2.md`
+
+## Huidige landingspagina
+
+De site bestaat uit drie schermvullende stappen:
+
+1. **Persoonlijk**
+   - Fullscreen hero met `hero-charge.webp`.
+   - Geanimeerde kop: `Jouw tijd.`, `Jouw energie.`, `Jouw leven.`
+   - CTA `Hoe het werkt` naar stap 2.
+   - Subtiele, doorlopende herozoom zonder sprong of zichtbare animatielus.
+
+2. **Doelgericht**
+   - Hoofdboodschap: alles wat nodig is om bewust in beweging te komen.
+   - Drie interactieve appschermen: Jouw doelen, Jouw lichaam en Jouw coach.
+   - Screenshots zweven in lichte telefoonframes en wisselen focus via hover of klik.
+
+3. **Resultaat**
+   - `Meer balans. Meer energie. Meer flow.` animeert regel voor regel omhoog.
+   - De vervolzin wordt daarna getypt.
+   - Twee grotere polaroids, Be You-logo en CTA `Ontdek de app`.
+
+De header bevat drie klikbare stappen en de CTA `Aanmelden`. Beide app-CTA's linken naar `https://app.wuwai.org/login`.
+
+## Merkrichting die behouden moet blijven
+
+- Het echte Wuwai-mandalalogo staat linksboven en is ook favicon/Apple Touch Icon.
+- Be You is de bestemming en payoff, niet de merknaam.
+- Gebruik de bestaande Wuwai-kleuren en groene knopverlopen uit de stylekit.
+- De hero blijft fotografisch, ruimtelijk en menselijk.
+- Stap 2 en 3 gebruiken een lichte, zachte Wuwai-wereld met diffuse diepte.
+- Motion moet betekenis en flow ondersteunen zonder onrust te veroorzaken.
+- `prefers-reduced-motion` moet gerespecteerd blijven.
+- Vermijd generieke wellnessbeelden, goeroetaal, harde verkoopdruk en nieuwe lettertypes buiten de bestaande richting.
 
 ## Techniek
 
 - Vite 6
 - React 19
-- TypeScript
+- TypeScript 5.9
 - Node.js 22.13 of hoger
-- Geen backend of database
-- Vercel publiceert automatisch na een push naar `main`
+- Geen backend of database in deze landingspagina
+- Vercel publiceert automatisch na een push naar GitHub `main`
 
 Belangrijke bestanden:
 
-- `app/page.tsx`: inhoud, secties, navigatie en formuliergedrag
-- `app/globals.css`: volledige visuele stijl, responsive layout en motion
-- `public/`: Wuwai-logo, Be You-logo en zeven chakra-assets
-- `tests/source.test.mjs`: basiscontroles op de negen schermen, navigatie en goedgekeurde copy
+- `app/page.tsx`: inhoud, drie stappen, navigatie en interacties
+- `app/globals.css`: volledige visuele stijl, responsive gedrag en motion
+- `index.html`: metadata, favicon, social preview en Google Analytics
+- `public/hero-charge.webp`: geoptimaliseerde heroafbeelding
+- `public/app-doelen.png`: screenshot Jouw doelen
+- `public/app-lichaam.png`: screenshot Jouw lichaam
+- `public/app-coach.png`: screenshot Jouw coach
+- `public/polaroid-child.jpg` en `public/polaroid-elder.jpg`: resultaatbeelden
+- `public/wuwai-logo.png`: Wuwai-logo en browsericoon
+- `public/be-you.svg`: Be You-logo
+- `tests/source.test.mjs`: bron- en regressiecontroles
 
-## Huidige landingspagina
+## Analytics en privacy
 
-De pagina bestaat uit negen schermen:
+Google Analytics staat rechtstreeks in `index.html` met measurement-ID:
 
-1. Intro met CTA, Be You-logo en acht thema's
-2. Fundament: zeven herkenningssignalen
-3. Ervaren: lichaam, geest en ziel
-4. Wilskracht: energetisch profiel en zes natuurlijke ritmes
-5. Liefde en verbinding: loslaten wat niet meer past
-6. Communicatie: zien, begrijpen en doen
-7. Intuïtie: elke dag een stap vooruit
-8. Spiritualiteit: bewust kiezen voor energie, balans en bewustzijn
-9. Be You en early-accessformulier
+- `G-Z8K5W1KJRV`
 
-De header bevat negen klikbare navigatiepunten. Ieder inhoudsscherm heeft onderaan een pijl naar het volgende scherm. Desktop en mobiel zijn gecontroleerd op viewportbalans, gelijke ritmeblokken en horizontale overflow.
+Er is nog geen cookiebanner of Consent Mode toegevoegd. Controleer vóór bredere marketing of de gewenste privacy- en toestemmingsflow nodig is en implementeer die dan bewust.
 
-## Merkrichting die behouden moet blijven
+## Formulieren en gegevens
 
-- Het echte Wuwai-mandalalogo staat linksboven.
-- Be You is de bestemming en payoff, niet de merknaam.
-- Liefde en verbinding vormen inhoudelijk het hart.
-- Montserrat wordt gebruikt voor koppen en Lato voor tekst.
-- De zeven chakrakleuren dragen de voortgang.
-- De basis is warm wit en lichtgrijs met zachte, diffuse diepte.
-- Vermijd generieke wellnessbeelden, goeroetaal, neonspiritualiteit en harde verkoopdruk.
-- Wijzig logo's, kerncopy of de negen-schermenstructuur niet zonder expliciete afstemming.
+De huidige drie-stappenpagina bevat geen early-accessformulier en slaat geen persoonsgegevens op. `Aanmelden` en `Ontdek de app` verwijzen naar `https://app.wuwai.org/login`.
 
-## Formulier en gegevensopslag
+## Lokaal werken
 
-Het early-accessformulier is momenteel alleen een frontenddemo.
+Open een terminal in de lokale bronmap en gebruik:
 
-- Naam en e-mailadres worden niet verstuurd of opgeslagen.
-- Verzenden voorkomt alleen de standaard browseractie en toont lokaal een melding.
-- De pagina vermeldt transparant dat de opslagkoppeling nog ontbreekt.
+```bash
+npm install
+npm run dev
+```
 
-Voordat echte inschrijvingen worden verzameld moet een bestemming worden gekozen, bijvoorbeeld een mailinglijst of database. Voeg daarna ook passende privacytekst, toestemming, foutafhandeling, spambeveiliging en een echte successtatus toe. Doe niet alsof een inschrijving is opgeslagen voordat de backendkoppeling aantoonbaar werkt.
+De lokale preview staat normaal op:
 
-## Openstaand: domein koppelen
+- `http://localhost:5173/`
 
-`wuwai.app` en `www.wuwai.app` zijn al aan het Vercel-project toegevoegd, maar Vercel toont nog `Invalid Configuration`.
-
-Cloud86 beheert het domein. De juiste route is inmiddels gevonden:
-
-1. Cloud86 openen.
-2. `Domeinnamen` openen.
-3. Bij `wuwai.app` kiezen voor `Beheer domein`.
-4. Op de beheerpagina `DNS beheren` openen.
-5. In Vercel bij zowel `wuwai.app` als `www.wuwai.app` `View DNS configuration` openen.
-6. De exacte, door Vercel getoonde waarden gebruiken.
-7. In Cloud86 alleen het website-record voor `@` en het record voor `www` aanpassen of vervangen.
-8. MX-, SPF-, DKIM- en overige TXT-records ongemoeid laten.
-9. Opslaan, wachten op DNS-propagatie en in Vercel bij beide domeinen op `Refresh` klikken.
-
-Gebruik geen gegokte of verouderde Vercel-waarden. Neem altijd de project-specifieke waarden uit `View DNS configuration` over. Verander de nameservers niet zolang records via `DNS beheren` aangepast kunnen worden.
-
-De gewenste Vercel-configuratie is:
-
-- `www.wuwai.app`: Production en primair domein
-- `wuwai.app`: 308-redirect naar `www.wuwai.app`
-
-Na geldige DNS-configuratie hoort Vercel automatisch het HTTPS-certificaat te regelen.
-
-## Controleren en publiceren
-
-Voer vanuit de projectmap uit:
+Controleer vóór publiceren:
 
 ```bash
 npm test
+git diff --check
 ```
-
-Dit bouwt de productieversie en voert de broncontroles uit.
 
 Na goedgekeurde wijzigingen:
 
 ```bash
 git add <gewijzigde-bestanden>
 git commit -m "Beschrijvende commitboodschap"
-git push
+git push origin main
 ```
 
-Controleer daarna de Vercel-deployment op desktop en mobiel. Test minimaal:
+Controleer daarna de nieuwe Vercel-deployment op desktop en mobiel.
 
-- Alle negen headerpunten navigeren naar het juiste scherm.
-- De CTA's gaan naar het formulier.
-- Iedere pijl gaat naar het volgende scherm.
-- Er is geen horizontale overflow.
-- De actieve navigatiestip verandert tijdens scrollen.
-- `prefers-reduced-motion` blijft gerespecteerd.
-- Het formulier claimt geen opslag zolang er geen backend is.
+## Laatste relevante commits
 
-## Relevante commits
+- `699e864` Smooth hero zoom and update site title
+- `8bbcc76` Add Google Analytics tracking
+- `3edfe61` Add narrative motion to V2 hero and results
+- `ccf4654` Refine V2 hero and desktop result spacing
+- `0ea5c0f` Polish V2 hero actions and result layout
+- `b30f5be` Use optimized charge hero image
+- `8e8913d` Refine V2 branding and device presentation
+- `a2b6d41` Polish V2 experience showcase
+- `82ecc5c` Create three-step Wuwai V2 experience
 
-- `b0c9906` Refine Wuwai story details and flow
-- `2ccc586` Polish Wuwai mobile journey and navigation
-- `0cf997d` Prepare Wuwai landing page for Vercel
-- `2c95302` Make Wuwai journey navigation reliable
-- `7e0a70a` Build Wuwai Be You landing page
+## Begin van een nieuwe Codex-chat
 
-## Eerstvolgende aanbevolen stappen
+Gebruik bijvoorbeeld:
 
-1. DNS bij Cloud86 afronden en beide domeinen in Vercel groen krijgen.
-2. `www.wuwai.app` en de redirect vanaf `wuwai.app` testen.
-3. Beslissen waar early-accessinschrijvingen worden opgeslagen.
-4. Formulier echt koppelen en de volledige verzendflow testen.
-5. Daarna pas een nieuwe inhoudelijke of visuele feedbackronde starten.
+> Ga verder met de Wuwai-landingspagina in `/Users/macbook/Documents/Codex/2026-08-16/referenced-chatgpt-conversation-this-is-an/site`. Lees eerst `HANDOFF.md`, `PRODUCT.md`, `DESIGN.md` en `V2.md`, controleer de huidige Git-status en laat de bestaande productieversie intact totdat nieuwe wijzigingen getest en goedgekeurd zijn.
 
