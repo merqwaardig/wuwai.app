@@ -70,6 +70,8 @@ test("retains Be You and links into the Wuwai app", () => {
   assert.match(styles, /top: calc\(9% \+ 10px\)/);
   assert.match(styles, /border-radius: 18px/);
   assert.match(styles, /bottom: 10px/);
+  assert.match(styles, /app-action-pulse 2\.8s/);
+  assert.match(styles, /@keyframes app-action-pulse/);
   assert.match(page, /<span>03<\/span> Resultaat/);
   assert.equal((page.match(/className="polaroid polaroid-/g) ?? []).length, 2);
   assert.doesNotMatch(page, /polaroid-michael/);

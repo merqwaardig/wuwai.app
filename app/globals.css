@@ -1366,6 +1366,18 @@ h2 {
   transition: transform 350ms var(--ease-out), background 250ms ease;
 }
 
+.app-login-action::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border: 2px solid oklch(0.64 0.15 147 / 0.38);
+  border-radius: 24px;
+  opacity: 0;
+  transform: scale(0.96);
+  pointer-events: none;
+  animation: app-action-pulse 2.8s var(--ease-out) infinite;
+}
+
 .app-login-action:hover {
   background: var(--action-gradient-hover);
   transform: translateX(-50%) translateY(-3px);
@@ -1444,6 +1456,12 @@ h2 {
   0% { opacity: 0; transform: translate3d(0, 108%, 0); }
   28% { opacity: 1; }
   100% { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes app-action-pulse {
+  0%, 46% { opacity: 0; transform: scale(0.96); }
+  58% { opacity: 0.42; }
+  100% { opacity: 0; transform: scale(1.14); }
 }
 
 @keyframes typing-caret {
