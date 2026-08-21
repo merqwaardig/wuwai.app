@@ -974,6 +974,28 @@ h2 {
   transform: translateX(63%) rotate(3deg) scale(0.98);
 }
 
+.phone-card.phone-position-left,
+.phone-card.phone-position-right {
+  z-index: 1;
+  opacity: 0.8;
+  filter: blur(0.7px) saturate(0.86) brightness(1.03);
+}
+
+.phone-card.phone-position-left {
+  transform: translateX(-74%) translateY(10px) rotate(0deg) scale(0.88);
+}
+
+.phone-card.phone-position-right {
+  transform: translateX(74%) translateY(10px) rotate(0deg) scale(0.88);
+}
+
+.phone-card.phone-position-center {
+  z-index: 5;
+  opacity: 1;
+  filter: none;
+  transform: translateY(-18px) rotate(0deg) scale(1.04);
+}
+
 .active-channel-copy {
   min-height: 3.1em;
   max-width: 48ch;
@@ -1156,7 +1178,7 @@ h2 {
 
 .polaroid {
   position: absolute;
-  width: 230px;
+  width: 242px;
   margin: 0;
   overflow: hidden;
   border-radius: 18px;
@@ -1176,13 +1198,13 @@ h2 {
 
 .polaroid-child {
   top: 0;
-  left: 4%;
+  left: calc(4% + 3px);
   animation: polaroid-float-left 7s ease-in-out infinite;
 }
 
 .polaroid-elder {
   top: 0;
-  right: 4%;
+  right: calc(4% + 3px);
   animation: polaroid-float-right 8s ease-in-out -2.4s infinite;
 }
 
@@ -1755,7 +1777,7 @@ h2 {
   }
 
   .polaroid {
-    width: 138px;
+    width: 145px;
   }
 
   .access-panel form {
@@ -1912,7 +1934,7 @@ h2 {
   }
 
   .polaroid {
-    width: 116px;
+    width: 122px;
   }
 
   .app-login-action {

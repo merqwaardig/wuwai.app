@@ -46,13 +46,14 @@ test("includes goals, body and coach as one personal experience", () => {
   assert.match(page, /\/app-doelen\.png/);
   assert.match(page, /\/app-lichaam\.png/);
   assert.match(page, /\/app-coach\.png/);
-  assert.match(page, /const mobileViewport = window\.matchMedia\("\(max-width: 820px\)"\)/);
+  assert.doesNotMatch(page, /const mobileViewport = window\.matchMedia/);
   assert.match(page, /3400/);
   assert.match(page, /setActiveChannel\(\(current\) =>/);
   assert.match(page, /phone-position-\$\{carouselPosition\}/);
   assert.match(styles, /phone-position-center/);
   assert.match(styles, /blur\(0\.7px\)/);
   assert.match(styles, /translateY\(5px\)/);
+  assert.match(styles, /translateX\(-74%\) translateY\(10px\) rotate\(0deg\) scale\(0\.88\)/);
 });
 
 test("retains Be You and links into the Wuwai app", () => {
@@ -69,6 +70,8 @@ test("retains Be You and links into the Wuwai app", () => {
   assert.match(styles, /white-space: pre-line/);
   assert.match(styles, /top: calc\(9% \+ 10px\)/);
   assert.match(styles, /border-radius: 18px/);
+  assert.match(styles, /width: 242px/);
+  assert.match(styles, /calc\(4% \+ 3px\)/);
   assert.match(styles, /bottom: 10px/);
   assert.match(styles, /app-action-pulse 2\.8s/);
   assert.match(styles, /@keyframes app-action-pulse/);

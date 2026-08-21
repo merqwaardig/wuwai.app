@@ -122,9 +122,8 @@ export default function Home() {
   useEffect(() => {
     if (activeStep !== 1) return;
 
-    const mobileViewport = window.matchMedia("(max-width: 820px)");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (!mobileViewport.matches || reducedMotion.matches) return;
+    if (reducedMotion.matches) return;
 
     const interval = window.setInterval(() => {
       setActiveChannel((current) => {
