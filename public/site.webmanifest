@@ -1,0 +1,17 @@
+{
+  "name": "Wuwai | Be You",
+  "short_name": "Wuwai",
+  "description": "Jouw tijd. Jouw energie. Jouw leven.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5F4F2",
+  "theme_color": "#F5F4F2",
+  "icons": [
+    {
+      "src": "/wuwai-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

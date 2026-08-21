@@ -161,7 +161,7 @@ export default function Home() {
           <div className="experience-spectrum" aria-hidden="true" />
           <div className="v2-inner experience-layout">
             <div className="experience-copy reveal">
-              <p className="step-eyebrow"><span>02</span> Hoe het werkt</p>
+              <p className="step-eyebrow"><span>02</span> Doelgericht</p>
               <h2>Alles wat je nodig hebt om bewust in beweging te komen.</h2>
               <p className="experience-summary">
                 Doelen, lichaamswijsheid en coaching komen samen in één persoonlijke ervaring.
@@ -183,7 +183,6 @@ export default function Home() {
                       style={{ "--channel-color": channel.color } as CSSProperties}
                     >
                       <span className="phone-frame">
-                        <span className="phone-speaker" aria-hidden="true" />
                         <img src={channel.screenshot} alt={channel.imageAlt} />
                       </span>
                     </button>

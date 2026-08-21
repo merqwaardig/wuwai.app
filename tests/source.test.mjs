@@ -10,7 +10,7 @@ test("contains the complete three-step Wuwai V2 experience", () => {
   assert.match(page, /const headlineWords = \["tijd", "energie", "leven"\]/);
   assert.match(page, /aria-label="Jouw tijd\. Jouw energie\. Jouw leven\."/);
   assert.match(page, /Alles wat je nodig hebt om bewust in beweging te komen\./);
-  assert.match(page, /<span>02<\/span> Hoe het werkt/);
+  assert.match(page, /<span>02<\/span> Doelgericht/);
   assert.match(page, /Meer balans\.<br \/>Meer energie\.<br \/>Meer flow\./);
 });
 
@@ -61,6 +61,13 @@ test("uses the supplied fullscreen hero image", () => {
   assert.match(styles, /object-fit: cover/);
 });
 
+test("uses the Wuwai mark as the browser and saved-site icon", async () => {
+  const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
+  assert.match(html, /rel="icon"[^>]+wuwai-logo\.png/);
+  assert.match(html, /rel="apple-touch-icon"[^>]+wuwai-logo\.png/);
+  assert.match(html, /rel="manifest" href="\/site\.webmanifest"/);
+});
+
 test("remains screen-led, responsive and motion-conscious", () => {
   assert.match(styles, /min-height: 100svh/);
   assert.match(styles, /scroll-snap-type: y proximity/);
@@ -68,4 +75,5 @@ test("remains screen-led, responsive and motion-conscious", () => {
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(styles, /scroll-margin-top: 0/);
   assert.match(styles, /object-fit: contain/);
+  assert.doesNotMatch(page, /className="phone-speaker"/);
 });
