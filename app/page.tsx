@@ -8,7 +8,7 @@ import {
 } from "react";
 
 const steps = [
-  { id: "eigenaarschap", label: "Persoonlijk", color: "var(--root-chakra)" },
+  { id: "eigenaarschap", label: "Persoonlijk", color: "var(--mind)" },
   { id: "ervaring", label: "Doelgericht", color: "var(--heart)" },
   { id: "resultaat", label: "Resultaat", color: "var(--spirit)" },
 ];
@@ -211,7 +211,7 @@ export default function Home() {
 
           <div className="v2-inner result-layout">
             <div className="result-copy reveal">
-              <p className="step-eyebrow"><span>03</span> Ervaar het resultaat</p>
+              <p className="step-eyebrow"><span>03</span> Resultaat</p>
               <h2>Meer balans.<br />Meer energie.<br />Meer flow.</h2>
               <p className="lead">Ervaar meer vrijheid, zelfvertrouwen en geef leiding aan je leven.</p>
             </div>

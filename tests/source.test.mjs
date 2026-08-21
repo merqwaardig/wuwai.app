@@ -31,6 +31,7 @@ test("keeps the three-step navigation and progression intact", () => {
   assert.equal((page.match(/<DownArrow/g) ?? []).length, 2);
   assert.match(page, /aria-label={`Stap \$\{activeStep \+ 1\} van 3`}/);
   assert.match(page, /label: "Persoonlijk"/);
+  assert.match(page, /label: "Persoonlijk", color: "var\(--mind\)"/);
   assert.match(page, /label: "Doelgericht"/);
   assert.match(page, /color: "var\(--spirit\)"/);
 });
@@ -51,6 +52,7 @@ test("retains Be You and links into the Wuwai app", () => {
   assert.match(page, />Aanmelden<\/a>/);
   assert.match(page, /Ontdek de app/);
   assert.match(page, /Ervaar meer vrijheid, zelfvertrouwen en geef leiding aan je leven\./);
+  assert.match(page, /<span>03<\/span> Resultaat/);
   assert.equal((page.match(/className="polaroid polaroid-/g) ?? []).length, 2);
   assert.doesNotMatch(page, /polaroid-michael/);
 });
