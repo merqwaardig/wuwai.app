@@ -8,9 +8,9 @@ import {
 } from "react";
 
 const steps = [
-  { id: "eigenaarschap", label: "Persoonlijk", color: "var(--mind)" },
-  { id: "ervaring", label: "Doelgericht", color: "var(--heart)" },
-  { id: "resultaat", label: "Resultaat", color: "var(--spirit)" },
+  { id: "eigenaarschap", label: "Voelen", color: "var(--mind)" },
+  { id: "ervaring", label: "Ervaren", color: "var(--heart)" },
+  { id: "resultaat", label: "Leven", color: "var(--spirit)" },
 ];
 
 const headlineWords = ["tijd", "energie", "leven"];
@@ -164,7 +164,7 @@ export default function Home() {
           ))}
         </nav>
 
-        <a className="header-action" href="https://app.wuwai.org/login">Aanmelden</a>
+        <a className="header-action" href="https://app.wuwai.org/login">Ontdek de app</a>
       </header>
 
       <main>
@@ -185,7 +185,7 @@ export default function Home() {
 
           <div className="v2-inner ownership-layout">
             <div className="ownership-copy reveal">
-              <p className="step-eyebrow"><span>01</span> Persoonlijk</p>
+              <p className="step-eyebrow"><span>01</span> Voelen</p>
               <h1 className="rotating-headline" aria-label="Jouw tijd. Jouw energie. Jouw leven.">
                 <span className="headline-static">Jouw</span>
                 <span className="headline-window" aria-hidden="true">
@@ -199,7 +199,7 @@ export default function Home() {
               </h1>
               <p className="hero-subline">
                 <strong>Jij bepaalt wat je uit je leven haalt.</strong>
-                <span>Ontdek wat jouw lichaam je vertelt en maak keuzes die echt bij je passen.</span>
+                <span>Ontdek wat jouw lichaam, geest en ziel vertellen.</span>
               </p>
               <a className="primary-action" href="#ervaring">
                 Hoe het werkt
@@ -216,7 +216,7 @@ export default function Home() {
           <div className="experience-spectrum" aria-hidden="true" />
           <div className="v2-inner experience-layout">
             <div className="experience-copy reveal">
-              <p className="step-eyebrow"><span>02</span> Doelgericht</p>
+              <p className="step-eyebrow"><span>02</span> Ervaren</p>
               <h2>Alles wat je nodig hebt om bewust in beweging te komen.</h2>
               <p className="experience-summary">
                 Doelen, lichaamswijsheid en coaching komen samen in één persoonlijke ervaring.
@@ -261,7 +261,7 @@ export default function Home() {
 
           <div className="v2-inner result-layout">
             <div className="result-copy reveal">
-              <p className="step-eyebrow"><span>03</span> Resultaat</p>
+              <p className="step-eyebrow"><span>03</span> Leven</p>
               <h2 className="result-headline" aria-label="Meer balans. Meer energie. Meer flow.">
                 {["Meer balans.", "Meer energie.", "Meer flow."].map((line) => (
                   <span className="result-line-mask" key={line} aria-hidden="true">
