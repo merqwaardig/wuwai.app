@@ -8,8 +8,8 @@
   "theme_color": "#F5F4F2",
   "icons": [
     {
-      "src": "/wuwai-logo.png",
-      "sizes": "512x512",
+      "src": "/apple-icon.png",
+      "sizes": "180x180",
       "type": "image/png",
       "purpose": "any"
     }

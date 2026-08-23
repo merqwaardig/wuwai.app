@@ -105,8 +105,8 @@ test("uses the supplied fullscreen hero image", () => {
 test("uses the Wuwai mark as the browser and saved-site icon", async () => {
   const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
   assert.match(html, /<title>Wuwai \| Jouw tijd\. Jouw energie\. Jouw leven\.<\/title>/);
-  assert.match(html, /rel="icon"[^>]+wuwai-logo\.png/);
-  assert.match(html, /rel="apple-touch-icon"[^>]+wuwai-logo\.png/);
+  assert.match(html, /rel="icon"[^>]+apple-icon\.png/);
+  assert.match(html, /rel="apple-touch-icon"[^>]+apple-icon\.png/);
   assert.match(html, /rel="manifest" href="\/site\.webmanifest"/);
 });
 
