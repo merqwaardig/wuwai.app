@@ -8,13 +8,13 @@ import {
 } from "react";
 
 const steps = [
-  { id: "eigenaarschap", label: "Voelen", color: "var(--mind)" },
-  { id: "ervaring", label: "Ervaren", color: "var(--heart)" },
+  { id: "eigenaarschap", label: "Voelen", color: "var(--heart)" },
+  { id: "ervaring", label: "Begrijpen", color: "var(--mind)" },
   { id: "resultaat", label: "Leven", color: "var(--spirit)" },
 ];
 
 const headlineWords = ["tijd", "energie", "leven"];
-const resultLead = "Ervaar meer vrijheid, zelfvertrouwen\nen geef leiding aan je leven.";
+const resultLead = "Vol vertrouwen & passie. Be | You";
 
 const channels = [
   {
@@ -60,6 +60,7 @@ export default function Home() {
   const activeChannelIndex = channels.findIndex((channel) => channel.id === activeChannel);
   const [headlineIndex, setHeadlineIndex] = useState(0);
   const [resultLeadLength, setResultLeadLength] = useState(0);
+  const [carouselPaused, setCarouselPaused] = useState(false);
 
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>(".v2-section"));
@@ -120,7 +121,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (activeStep !== 1) return;
+    if (activeStep !== 1 || carouselPaused) return;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (reducedMotion.matches) return;
@@ -133,7 +134,7 @@ export default function Home() {
     }, 3400);
 
     return () => window.clearInterval(interval);
-  }, [activeStep]);
+  }, [activeStep, carouselPaused]);
 
   const moveEnergy = (event: ReactPointerEvent<HTMLElement>) => {
     const bounds = event.currentTarget.getBoundingClientRect();
@@ -164,7 +165,10 @@ export default function Home() {
           ))}
         </nav>
 
-        <a className="header-action" href="https://app.wuwai.org/login">Ontdek de app</a>
+        <a className="header-action" href="https://app.wuwai.org/login">
+          <span>Ontdek de app</span>
+          <i aria-hidden="true">→</i>
+        </a>
       </header>
 
       <main>
@@ -185,7 +189,6 @@ export default function Home() {
 
           <div className="v2-inner ownership-layout">
             <div className="ownership-copy reveal">
-              <p className="step-eyebrow"><span>01</span> Voelen</p>
               <h1 className="rotating-headline" aria-label="Jouw tijd. Jouw energie. Jouw leven.">
                 <span className="headline-static">Jouw</span>
                 <span className="headline-window" aria-hidden="true">
@@ -199,31 +202,43 @@ export default function Home() {
               </h1>
               <p className="hero-subline">
                 <strong>Jij bepaalt wat je uit je leven haalt.</strong>
-                <span>Ontdek wat jouw lichaam, geest en ziel vertellen.</span>
+                <span>Leer vertrouwen op wat je lichaam je vertelt.</span>
               </p>
               <a className="primary-action" href="#ervaring">
-                Hoe het werkt
+                Ontdek hoe
                 <span aria-hidden="true">↓</span>
               </a>
             </div>
 
           </div>
 
-          <DownArrow href="#ervaring" label="Ga naar stap 2, ervaar hoe het werkt" />
+          <DownArrow href="#ervaring" label="Ga naar stap 2, begrijpen" />
         </section>
 
         <section id="ervaring" className="v2-section experience-section">
           <div className="experience-spectrum" aria-hidden="true" />
           <div className="v2-inner experience-layout">
             <div className="experience-copy reveal">
-              <p className="step-eyebrow"><span>02</span> Ervaren</p>
-              <h2>Alles wat je nodig hebt om bewust in beweging te komen.</h2>
+              <h2>Ontdek wat jou in beweging brengt.</h2>
               <p className="experience-summary">
-                Doelen, lichaamswijsheid en coaching komen samen in één persoonlijke ervaring.
+                Door te doen groeien we en geven we richting aan ons leven.
               </p>
             </div>
 
-            <div className="channel-experience reveal reveal-late">
+            <div
+              className="channel-experience reveal reveal-late"
+              onPointerEnter={(event) => {
+                if (event.pointerType === "mouse" || event.pointerType === "pen") setCarouselPaused(true);
+              }}
+              onPointerLeave={(event) => {
+                if (event.pointerType === "mouse" || event.pointerType === "pen") setCarouselPaused(false);
+              }}
+              onPointerDown={() => setCarouselPaused(true)}
+              onFocusCapture={() => setCarouselPaused(true)}
+              onBlurCapture={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget)) setCarouselPaused(false);
+              }}
+            >
               <div className="phone-showcase" role="list" aria-label="Drie Wuwai-appschermen">
                 {channels.map((channel, channelIndex) => {
                   const isActive = activeChannel === channel.id;
@@ -235,7 +250,6 @@ export default function Home() {
                       className={`phone-card phone-${channel.id} phone-position-${carouselPosition} ${isActive ? "is-active" : ""}`}
                       type="button"
                       onClick={() => setActiveChannel(channel.id)}
-                      onPointerEnter={() => setActiveChannel(channel.id)}
                       aria-pressed={isActive}
                       style={{ "--channel-color": channel.color } as CSSProperties}
                     >
@@ -261,9 +275,8 @@ export default function Home() {
 
           <div className="v2-inner result-layout">
             <div className="result-copy reveal">
-              <p className="step-eyebrow"><span>03</span> Leven</p>
-              <h2 className="result-headline" aria-label="Meer balans. Meer energie. Meer flow.">
-                {["Meer balans.", "Meer energie.", "Meer flow."].map((line) => (
+              <h2 className="result-headline" aria-label="Leef in vrijheid, autonomie en flow.">
+                {["Leef in vrijheid,", "autonomie en flow."].map((line) => (
                   <span className="result-line-mask" key={line} aria-hidden="true">
                     <span className="result-line">{line}</span>
                   </span>
@@ -276,26 +289,27 @@ export default function Home() {
                   <i className={resultLeadLength === resultLead.length ? "is-complete" : ""} />
                 </span>
               </p>
-            </div>
-
-            <div className="be-you-destination reveal reveal-late">
-              <div className="be-you-rings" aria-hidden="true">
-                <span /><span /><span />
-              </div>
-              <div className="polaroid-cluster" aria-label="Mensen in verschillende levensfasen">
-                <figure className="polaroid polaroid-child">
-                  <img src="/polaroid-child.jpg" alt="Portret van een kind in warm daglicht" />
-                </figure>
-                <figure className="polaroid polaroid-elder">
-                  <img src="/polaroid-elder.jpg" alt="Portret van een oudere vrouw" />
-                </figure>
-              </div>
-              <img className="be-you-mark" src="/be-you.svg" alt="Be You" />
-
               <a className="app-login-action" href="https://app.wuwai.org/login">
                 <span>Ontdek de app</span>
                 <i aria-hidden="true">→</i>
               </a>
+            </div>
+
+            <div className="be-you-destination reveal reveal-late">
+              <div className="result-image-stage" aria-label="Mensen in verschillende levensfasen">
+                <img
+                  className="result-image result-image-child"
+                  src="/polaroid-child.jpg"
+                  alt="Kind in warm daglicht"
+                />
+                <img
+                  className="result-image result-image-elder"
+                  src="/polaroid-elder.jpg"
+                  alt="Oudere vrouw die rustig in de camera kijkt"
+                />
+                <div className="result-image-shade" aria-hidden="true" />
+                <img className="be-you-mark" src="/be-you.svg" alt="Be You" />
+              </div>
             </div>
           </div>
         </section>

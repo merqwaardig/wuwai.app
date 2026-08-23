@@ -196,8 +196,9 @@ h2 {
   min-height: 42px;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 0 18px;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 8px 0 18px;
   border-radius: 15px;
   background: var(--action-gradient);
   color: oklch(0.985 0.006 150);
@@ -210,6 +211,18 @@ h2 {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   transition: transform 350ms var(--ease-out), background 250ms ease;
+}
+
+.header-action i {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: oklch(0.99 0.005 150 / 0.18);
+  font-style: normal;
+  font-size: 15px;
 }
 
 .header-action:hover {
@@ -334,7 +347,7 @@ h2 {
   position: absolute;
   z-index: 1;
   inset: 0;
-  background: oklch(0.1 0.01 80 / 0.1);
+  background: oklch(0.1 0.01 80 / 0.2);
   pointer-events: none;
 }
 
@@ -491,12 +504,12 @@ h2 {
 .hero-subline strong,
 .hero-subline span {
   display: block;
+  font-weight: 700;
 }
 
 .hero-subline strong {
   margin-bottom: 5px;
   color: oklch(0.985 0.005 90);
-  font-size: 1.08em;
 }
 
 .primary-action {
@@ -1042,15 +1055,22 @@ h2 {
 
 .result-layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(480px, 1.08fr);
-  align-items: center;
-  gap: clamp(44px, 7vw, 110px);
+  grid-template-columns: minmax(0, 0.9fr) minmax(520px, 1.1fr);
+  align-items: stretch;
+  gap: clamp(44px, 6vw, 96px);
+}
+
+.result-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .result-copy h2 {
-  margin-bottom: 30px;
-  font-size: clamp(3.4rem, 5.7vw, 6.2rem);
-  line-height: 0.92;
+  margin-bottom: 32px;
+  font-size: clamp(3.3rem, 5.35vw, 5.9rem);
+  line-height: 0.94;
 }
 
 .result-line-mask {
@@ -1074,11 +1094,7 @@ h2 {
 }
 
 .result-section.is-visible .result-line-mask:nth-child(2) .result-line {
-  animation-delay: 520ms;
-}
-
-.result-section.is-visible .result-line-mask:nth-child(3) .result-line {
-  animation-delay: 1040ms;
+  animation-delay: 620ms;
 }
 
 .result-typed-copy {
@@ -1116,98 +1132,57 @@ h2 {
 
 .be-you-destination {
   position: relative;
-  min-height: 610px;
-  display: grid;
-  align-content: center;
-  justify-items: center;
+  min-height: min(72vh, 650px);
+  display: block;
 }
 
-.be-you-rings {
+.result-image-stage {
   position: absolute;
-  top: 46%;
-  left: 50%;
-  width: min(100%, 520px);
-  aspect-ratio: 1;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  overflow: hidden;
+  border-radius: 32px;
+  background: oklch(0.28 0.025 85);
+  box-shadow: 0 34px 88px oklch(0.3 0.035 150 / 0.22);
+  isolation: isolate;
 }
 
-.be-you-rings span {
+.result-image {
   position: absolute;
-  inset: var(--ring-inset);
-  border: 1px solid var(--ring-color);
-  border-radius: 50%;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 36%;
+  will-change: opacity, transform;
 }
 
-.be-you-rings span:nth-child(1) {
-  --ring-inset: 0;
-  --ring-color: oklch(0.65 0.19 28 / 0.17);
-  border-style: dashed;
-  animation: slow-spin 30s linear infinite;
+.result-image-child {
+  animation: result-image-child 14s ease-in-out infinite;
 }
 
-.be-you-rings span:nth-child(2) {
-  --ring-inset: 15%;
-  --ring-color: oklch(0.64 0.15 242 / 0.17);
-  animation: reverse-spin 24s linear infinite;
+.result-image-elder {
+  opacity: 0;
+  animation: result-image-elder 14s ease-in-out infinite;
 }
 
-.be-you-rings span:nth-child(3) {
-  --ring-inset: 30%;
-  --ring-color: oklch(0.68 0.15 147 / 0.21);
+.result-image-shade {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(to top, oklch(0.12 0.018 150 / 0.64), transparent 48%);
+  pointer-events: none;
 }
 
 .be-you-mark {
   position: absolute;
-  z-index: 4;
-  top: 72%;
-  left: 50%;
-  width: min(32%, 160px);
-  margin: 0;
-  transform: translate(-50%, -50%);
-  filter: drop-shadow(0 20px 40px oklch(0.4 0.04 150 / 0.12));
-}
-
-.polaroid-cluster {
-  position: absolute;
   z-index: 2;
-  top: calc(9% + 10px);
+  bottom: clamp(24px, 4vw, 44px);
   left: 50%;
-  width: min(100%, 600px);
-  height: 330px;
-  transform: translateX(-50%);
-  pointer-events: none;
-}
-
-.polaroid {
-  position: absolute;
-  width: 242px;
+  width: min(34%, 190px);
   margin: 0;
-  overflow: hidden;
-  border-radius: 18px;
-  background: oklch(0.96 0.008 100);
-  box-shadow:
-    0 18px 38px oklch(0.28 0.035 150 / 0.18),
-    0 3px 10px oklch(0.28 0.025 150 / 0.12);
-}
-
-.polaroid img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  display: block;
-  object-fit: cover;
-  filter: saturate(0.92) contrast(0.98);
-}
-
-.polaroid-child {
-  top: 0;
-  left: calc(4% + 3px);
-  animation: polaroid-float-left 7s ease-in-out infinite;
-}
-
-.polaroid-elder {
-  top: 0;
-  right: calc(4% + 3px);
-  animation: polaroid-float-right 8s ease-in-out -2.4s infinite;
+  transform: translateX(-50%);
+  filter: brightness(0) invert(1) drop-shadow(0 12px 30px oklch(0.08 0.01 150 / 0.3));
 }
 
 .access-panel {
@@ -1364,11 +1339,9 @@ h2 {
 }
 
 .app-login-action {
-  position: absolute;
+  position: relative;
   z-index: 5;
-  bottom: 4%;
-  left: 50%;
-  width: min(100%, 250px);
+  width: min(100%, 270px);
   min-height: 64px;
   display: flex;
   align-items: center;
@@ -1386,14 +1359,14 @@ h2 {
   font-weight: 800;
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  transform: translateX(-50%);
+  margin-top: 34px;
   transition: transform 350ms var(--ease-out), background 250ms ease, box-shadow 350ms ease;
   animation: app-action-pulse 2.8s var(--ease-out) infinite;
 }
 
 .app-login-action:hover {
   background: var(--action-gradient-hover);
-  transform: translateX(-50%) translateY(-3px);
+  transform: translateY(-3px);
   animation-play-state: paused;
 }
 
@@ -1474,19 +1447,31 @@ h2 {
 
 @keyframes app-action-pulse {
   0%, 56%, 100% {
-    transform: translateX(-50%) scale(1);
+    transform: scale(1);
     box-shadow:
       0 6px 16px color-mix(in srgb, #3e9b6c 28%, transparent),
       0 20px 46px oklch(0.5 0.12 151 / 0.18),
       inset 0 1px 0 rgba(255, 255, 255, 0.22);
   }
   68% {
-    transform: translateX(-50%) scale(1.025);
+    transform: scale(1.025);
     box-shadow:
       0 10px 24px color-mix(in srgb, #3e9b6c 36%, transparent),
       0 24px 54px oklch(0.5 0.12 151 / 0.24),
       inset 0 1px 0 rgba(255, 255, 255, 0.28);
   }
+}
+
+@keyframes result-image-child {
+  0%, 42% { opacity: 1; transform: scale(1.02); }
+  50%, 92% { opacity: 0; transform: scale(1.075); }
+  100% { opacity: 1; transform: scale(1.02); }
+}
+
+@keyframes result-image-elder {
+  0%, 42% { opacity: 0; transform: scale(1.075); }
+  50%, 92% { opacity: 1; transform: scale(1.02); }
+  100% { opacity: 0; transform: scale(1.075); }
 }
 
 @keyframes primary-action-pulse {
@@ -1517,7 +1502,7 @@ h2 {
 
 @media (max-width: 1050px) {
   .result-layout {
-    grid-template-columns: minmax(0, 1fr) minmax(380px, 0.82fr);
+    grid-template-columns: minmax(0, 0.9fr) minmax(400px, 1.1fr);
     gap: 40px;
   }
 
@@ -1610,9 +1595,16 @@ h2 {
 
   .header-action {
     min-height: 38px;
-    padding: 0 11px;
+    gap: 7px;
+    padding: 0 6px 0 11px;
     border-radius: 13px;
     font-size: 10px;
+  }
+
+  .header-action i {
+    width: 26px;
+    height: 26px;
+    font-size: 13px;
   }
 
   .v2-section {
@@ -1777,27 +1769,11 @@ h2 {
   }
 
   .be-you-destination {
-    min-height: 380px;
-  }
-
-  .be-you-rings {
-    width: min(80vw, 390px);
+    min-height: 340px;
   }
 
   .be-you-mark {
-    width: min(30%, 132px);
-    top: 68%;
-    margin: 0;
-  }
-
-  .polaroid-cluster {
-    top: 10px;
-    width: min(92vw, 390px);
-    height: 220px;
-  }
-
-  .polaroid {
-    width: 145px;
+    width: min(34%, 150px);
   }
 
   .access-panel form {
@@ -1926,40 +1902,34 @@ h2 {
 
   .result-section {
     align-items: flex-start;
+    padding-bottom: 22px;
   }
 
   .result-copy h2 {
     margin-bottom: 18px;
-    font-size: clamp(2.75rem, 12vw, 3.75rem);
+    font-size: clamp(2.7rem, 11.5vw, 3.7rem);
   }
 
-  .result-copy .lead {
-    margin-bottom: 7px;
+  .result-typed-copy {
+    min-height: 2.6em;
   }
 
   .be-you-destination {
-    min-height: 330px;
+    min-height: clamp(290px, 42svh, 380px);
   }
 
   .be-you-mark {
-    width: min(29%, 112px);
-    top: 66%;
-    margin: 0;
-    transform: translate(-50%, calc(-50% - 10px));
+    bottom: 22px;
+    width: min(34%, 128px);
   }
 
-  .polaroid-cluster {
-    width: min(92vw, 340px);
-    height: 190px;
-  }
-
-  .polaroid {
-    width: 122px;
+  .result-image-stage {
+    border-radius: 24px;
   }
 
   .app-login-action {
-    bottom: 10px;
     min-height: 54px;
+    margin-top: 20px;
   }
 
   .form-fields {
