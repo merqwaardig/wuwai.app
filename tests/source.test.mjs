@@ -11,7 +11,7 @@ test("contains the complete three-step Wuwai V2 experience", () => {
   assert.match(page, /aria-label="Jouw tijd\. Jouw energie\. Jouw leven\."/);
   assert.match(page, /Ontdek wat jou in beweging brengt\./);
   assert.doesNotMatch(page, /<span>02<\/span> Begrijpen/);
-  assert.match(page, /aria-label="Leef in vrijheid, autonomie en flow\."/);
+  assert.match(page, /aria-label="Leef in vrijheid, autonomie & flow\."/);
 });
 
 test("animates the ownership headline without compromising accessibility", () => {
@@ -20,7 +20,6 @@ test("animates the ownership headline without compromising accessibility", () =>
   assert.match(page, /prefers-reduced-motion: reduce/);
   assert.match(page, /headline-word/);
   assert.match(page, /Jij bepaalt wat je uit je leven haalt\./);
-  assert.match(page, /Leer vertrouwen op wat je lichaam je vertelt\./);
   assert.doesNotMatch(page, /<span>01<\/span> Voelen/);
   assert.match(styles, /hero-spatial-zoom 18s/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
@@ -32,7 +31,8 @@ test("keeps the three-step navigation and progression intact", () => {
     assert.match(page, new RegExp(`href="#${id}"`));
   }
 
-  assert.equal((page.match(/<DownArrow/g) ?? []).length, 2);
+  assert.equal((page.match(/<DownArrow/g) ?? []).length, 1);
+  assert.match(page, /Ervaar het verschil/);
   assert.match(page, /aria-label={`Stap \$\{activeStep \+ 1\} van 3`}/);
   assert.match(page, /label: "Voelen"/);
   assert.match(page, /label: "Voelen", color: "var\(--heart\)"/);
@@ -45,7 +45,7 @@ test("includes goals, body and coach as one personal experience", () => {
   assert.match(page, /title: "Jouw doelen"/);
   assert.match(page, /title: "Jouw lichaam"/);
   assert.match(page, /title: "Jouw coach"/);
-  assert.match(page, /Door te doen groeien we en geven we richting aan ons leven\./);
+  assert.match(page, /Ervaar groei en geef richting aan je leven\./);
   assert.match(page, /\/app-doelen\.png/);
   assert.match(page, /\/app-lichaam\.png/);
   assert.match(page, /\/app-coach\.png/);
@@ -58,7 +58,7 @@ test("includes goals, body and coach as one personal experience", () => {
   assert.match(page, /phone-position-\$\{carouselPosition\}/);
   assert.match(styles, /phone-position-center/);
   assert.match(styles, /blur\(0\.7px\)/);
-  assert.match(styles, /translateY\(5px\)/);
+  assert.match(styles, /translateY\(10px\)/);
   assert.match(styles, /translateX\(-74%\) translateY\(10px\) rotate\(0deg\) scale\(0\.88\)/);
 });
 
@@ -68,13 +68,11 @@ test("retains Be You and links into the Wuwai app", () => {
   assert.match(page, /<span>Ontdek de app<\/span>/);
   assert.match(page, /<i aria-hidden="true">→<\/i>/);
   assert.match(page, /Ontdek de app/);
-  assert.match(page, /Vol vertrouwen & passie\. Be \| You/);
-  assert.match(page, /resultLead\.slice\(0, resultLeadLength\)/);
+  assert.match(page, /Vertrouw op wat je lichaam je vertelt\./);
+  assert.doesNotMatch(page, /resultLead\.slice\(0, resultLeadLength\)/);
   assert.match(styles, /result-line-in 880ms/);
-  assert.match(page, /2100/);
   assert.match(styles, /animation-delay: 620ms/);
   assert.match(styles, /padding-bottom: 0\.14em/);
-  assert.match(styles, /white-space: pre-line/);
   assert.match(styles, /\.result-image-stage/);
   assert.match(styles, /border-radius: 32px/);
   assert.match(styles, /result-image-child 14s/);

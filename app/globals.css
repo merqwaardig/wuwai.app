@@ -736,6 +736,10 @@ h2 {
   line-height: 1.5;
 }
 
+.experience-action {
+  margin-top: 24px;
+}
+
 .channel-experience {
   position: relative;
   min-height: 540px;
@@ -1097,37 +1101,8 @@ h2 {
   animation-delay: 620ms;
 }
 
-.result-typed-copy {
-  position: relative;
-  min-height: 2.84em;
-}
-
-.result-typed-measure {
-  visibility: hidden;
-}
-
-.result-typed-measure,
-.result-typed-text {
-  white-space: pre-line;
-}
-
-.result-typed-text {
-  position: absolute;
-  inset: 0;
-}
-
-.result-typed-text i {
-  width: 2px;
-  height: 1em;
-  display: inline-block;
-  margin-left: 3px;
-  background: currentColor;
-  vertical-align: -0.08em;
-  animation: typing-caret 720ms steps(1, end) infinite;
-}
-
-.result-typed-text i.is-complete {
-  animation: typing-caret-out 420ms ease forwards;
+.result-supporting-copy {
+  min-height: 0;
 }
 
 .be-you-destination {
@@ -1359,7 +1334,7 @@ h2 {
   font-weight: 800;
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  margin-top: 34px;
+  margin-top: 29px;
   transition: transform 350ms var(--ease-out), background 250ms ease, box-shadow 350ms ease;
   animation: app-action-pulse 2.8s var(--ease-out) infinite;
 }
@@ -1489,15 +1464,6 @@ h2 {
       0 22px 50px oklch(0.5 0.12 151 / 0.22),
       inset 0 1px 0 rgba(255, 255, 255, 0.28);
   }
-}
-
-@keyframes typing-caret {
-  0%, 48% { opacity: 1; }
-  49%, 100% { opacity: 0; }
-}
-
-@keyframes typing-caret-out {
-  to { opacity: 0; }
 }
 
 @media (max-width: 1050px) {
@@ -1656,12 +1622,13 @@ h2 {
 
   .experience-copy h2 {
     max-width: 18ch;
-    font-size: clamp(2.35rem, 7vw, 3.6rem);
+    font-size: clamp(2.55rem, 7.6vw, 3.9rem);
   }
 
   .experience-summary {
     max-width: 46ch;
     margin-top: 14px;
+    font-size: clamp(1.08rem, 2.3vw, 1.2rem);
   }
 
   .channel-experience {
@@ -1671,11 +1638,11 @@ h2 {
 
   .phone-showcase {
     min-height: 320px;
-    transform: translateY(5px);
+    transform: translateY(10px);
   }
 
   .phone-card {
-    width: clamp(132px, 19vw, 150px);
+    width: clamp(140px, 20vw, 160px);
   }
 
   .phone-frame {
@@ -1850,17 +1817,18 @@ h2 {
   }
 
   .experience-section {
-    align-items: center;
+    align-items: flex-start;
+    padding-bottom: 72px;
   }
 
   .experience-copy h2 {
     max-width: 17ch;
-    font-size: clamp(2.05rem, 8.7vw, 2.8rem);
+    font-size: clamp(2.35rem, 9.8vw, 3.15rem);
     line-height: 0.98;
   }
 
   .experience-summary {
-    font-size: 0.93rem;
+    font-size: 1.04rem;
     line-height: 1.42;
   }
 
@@ -1877,7 +1845,7 @@ h2 {
   }
 
   .phone-card {
-    width: clamp(112px, 31vw, 126px);
+    width: clamp(120px, 33vw, 136px);
   }
 
   .phone-label {
@@ -1901,21 +1869,17 @@ h2 {
   }
 
   .result-section {
-    align-items: flex-start;
+    align-items: center;
     padding-bottom: 22px;
   }
 
   .result-copy h2 {
     margin-bottom: 18px;
-    font-size: clamp(2.7rem, 11.5vw, 3.7rem);
-  }
-
-  .result-typed-copy {
-    min-height: 2.6em;
+    font-size: clamp(2.55rem, 10.8vw, 3.5rem);
   }
 
   .be-you-destination {
-    min-height: clamp(290px, 42svh, 380px);
+    min-height: clamp(290px, 38svh, 350px);
   }
 
   .be-you-mark {
@@ -1929,7 +1893,7 @@ h2 {
 
   .app-login-action {
     min-height: 54px;
-    margin-top: 20px;
+    margin-top: 15px;
   }
 
   .form-fields {
@@ -2014,7 +1978,4 @@ h2 {
     transform: none;
   }
 
-  .result-typed-text i {
-    display: none;
-  }
 }

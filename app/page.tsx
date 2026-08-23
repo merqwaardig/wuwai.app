@@ -14,7 +14,6 @@ const steps = [
 ];
 
 const headlineWords = ["tijd", "energie", "leven"];
-const resultLead = "Vol vertrouwen & passie. Be | You";
 
 const channels = [
   {
@@ -59,7 +58,6 @@ export default function Home() {
   const [activeChannel, setActiveChannel] = useState("lichaam");
   const activeChannelIndex = channels.findIndex((channel) => channel.id === activeChannel);
   const [headlineIndex, setHeadlineIndex] = useState(0);
-  const [resultLeadLength, setResultLeadLength] = useState(0);
   const [carouselPaused, setCarouselPaused] = useState(false);
 
   useEffect(() => {
@@ -79,35 +77,6 @@ export default function Home() {
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
-
-  useEffect(() => {
-    if (activeStep !== 2) return;
-
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reducedMotion.matches) {
-      setResultLeadLength(resultLead.length);
-      return;
-    }
-
-    setResultLeadLength(0);
-    let typingInterval = 0;
-    const startTyping = window.setTimeout(() => {
-      typingInterval = window.setInterval(() => {
-        setResultLeadLength((current) => {
-          if (current >= resultLead.length) {
-            window.clearInterval(typingInterval);
-            return current;
-          }
-          return current + 1;
-        });
-      }, 32);
-    }, 2100);
-
-    return () => {
-      window.clearTimeout(startTyping);
-      window.clearInterval(typingInterval);
-    };
-  }, [activeStep]);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -202,7 +171,6 @@ export default function Home() {
               </h1>
               <p className="hero-subline">
                 <strong>Jij bepaalt wat je uit je leven haalt.</strong>
-                <span>Leer vertrouwen op wat je lichaam je vertelt.</span>
               </p>
               <a className="primary-action" href="#ervaring">
                 Ontdek hoe
@@ -221,8 +189,12 @@ export default function Home() {
             <div className="experience-copy reveal">
               <h2>Ontdek wat jou in beweging brengt.</h2>
               <p className="experience-summary">
-                Door te doen groeien we en geven we richting aan ons leven.
+                Ervaar groei en geef richting aan je leven.
               </p>
+              <a className="primary-action experience-action" href="#resultaat">
+                Ervaar het verschil
+                <span aria-hidden="true">↓</span>
+              </a>
             </div>
 
             <div
@@ -266,7 +238,6 @@ export default function Home() {
             </div>
           </div>
 
-          <DownArrow href="#resultaat" label="Ga naar stap 3, ervaar het resultaat" />
         </section>
 
         <section id="resultaat" className="v2-section result-section">
@@ -275,19 +246,15 @@ export default function Home() {
 
           <div className="v2-inner result-layout">
             <div className="result-copy reveal">
-              <h2 className="result-headline" aria-label="Leef in vrijheid, autonomie en flow.">
-                {["Leef in vrijheid,", "autonomie en flow."].map((line) => (
+              <h2 className="result-headline" aria-label="Leef in vrijheid, autonomie & flow.">
+                {["Leef in vrijheid,", "autonomie & flow."].map((line) => (
                   <span className="result-line-mask" key={line} aria-hidden="true">
                     <span className="result-line">{line}</span>
                   </span>
                 ))}
               </h2>
-              <p className="lead result-typed-copy" aria-label={resultLead}>
-                <span className="result-typed-measure" aria-hidden="true">{resultLead}</span>
-                <span className="result-typed-text" aria-hidden="true">
-                  {resultLead.slice(0, resultLeadLength)}
-                  <i className={resultLeadLength === resultLead.length ? "is-complete" : ""} />
-                </span>
+              <p className="lead result-supporting-copy">
+                Vertrouw op wat je lichaam je vertelt.
               </p>
               <a className="app-login-action" href="https://app.wuwai.org/login">
                 <span>Ontdek de app</span>
