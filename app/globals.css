@@ -1890,6 +1890,11 @@ h2 {
     padding-top: 40px;
   }
 
+  .experience-copy {
+    position: relative;
+    top: -10px;
+  }
+
   .experience-copy h2 {
     max-width: 17ch;
     font-size: clamp(2.35rem, 9.8vw, 3.15rem);
@@ -1925,6 +1930,13 @@ h2 {
     align-self: end;
     justify-self: start;
     margin-top: 0;
+    position: relative;
+    top: 10px;
+  }
+
+  .active-channel-copy {
+    position: relative;
+    top: 5px;
   }
 
   .phone-label {
@@ -1966,6 +1978,10 @@ h2 {
   .be-you-destination > .app-login-action {
     align-self: flex-start;
     margin-top: 0;
+  }
+
+  .result-image-stage {
+    transform: translateY(-5px);
   }
 
   .be-you-mark {
