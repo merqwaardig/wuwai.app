@@ -727,6 +727,10 @@ h2 {
   line-height: 0.98;
 }
 
+.experience-copy h2 > span {
+  display: block;
+}
+
 .experience-summary {
   max-width: 42ch;
   margin: 30px 0 0;
@@ -738,6 +742,10 @@ h2 {
 
 .experience-action {
   margin-top: 24px;
+}
+
+.mobile-action {
+  display: none;
 }
 
 .channel-experience {
@@ -1018,7 +1026,7 @@ h2 {
 .active-channel-copy {
   min-height: 3.1em;
   max-width: 48ch;
-  margin: 3px auto 0;
+  margin: 14px auto 0;
   color: oklch(0.36 0.014 150);
   font-size: 14px;
   font-weight: 700;
@@ -1355,6 +1363,11 @@ h2 {
   font-style: normal;
 }
 
+.app-login-action.mobile-action,
+.primary-action.mobile-action {
+  display: none;
+}
+
 @keyframes slow-spin {
   to { transform: rotate(360deg); }
 }
@@ -1483,8 +1496,17 @@ h2 {
   }
 
   .channel-experience {
-    min-height: 520px;
+    min-height: 470px;
     grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .phone-showcase {
+    min-height: 420px;
+  }
+
+  .active-channel-copy {
+    margin-top: 4px;
   }
 
   .channel:nth-child(1),
@@ -1584,6 +1606,39 @@ h2 {
     gap: 24px;
   }
 
+  .desktop-action {
+    display: none;
+  }
+
+  .app-login-action.mobile-action,
+  .primary-action.mobile-action {
+    display: inline-flex;
+  }
+
+  .channel-experience > .experience-action {
+    align-self: center;
+    margin-top: 20px;
+  }
+
+  .be-you-destination {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .result-image-stage {
+    position: relative;
+    inset: auto;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .be-you-destination > .app-login-action {
+    flex: 0 0 auto;
+    align-self: center;
+    margin-top: 0;
+  }
+
   .ownership-copy,
   .experience-copy,
   .result-copy {
@@ -1634,11 +1689,16 @@ h2 {
   .channel-experience {
     min-height: 370px;
     grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .phone-showcase {
     min-height: 320px;
     transform: translateY(10px);
+  }
+
+  .active-channel-copy {
+    margin-top: 14px;
   }
 
   .phone-card {
@@ -1845,7 +1905,7 @@ h2 {
   }
 
   .phone-card {
-    width: clamp(120px, 33vw, 136px);
+    width: clamp(126px, 34.7vw, 143px);
   }
 
   .phone-label {
@@ -1869,7 +1929,7 @@ h2 {
   }
 
   .result-section {
-    align-items: center;
+    align-items: flex-start;
     padding-bottom: 22px;
   }
 
@@ -1879,7 +1939,8 @@ h2 {
   }
 
   .be-you-destination {
-    min-height: clamp(290px, 38svh, 350px);
+    min-height: clamp(390px, 51svh, 470px);
+    gap: 14px;
   }
 
   .be-you-mark {

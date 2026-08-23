@@ -2,6 +2,7 @@
 
 import {
   CSSProperties,
+  MouseEvent as ReactMouseEvent,
   PointerEvent as ReactPointerEvent,
   useEffect,
   useState,
@@ -45,9 +46,17 @@ const channels = [
   },
 ];
 
-function DownArrow({ href, label }: { href: string; label: string }) {
+function DownArrow({
+  href,
+  label,
+  onClick,
+}: {
+  href: string;
+  label: string;
+  onClick: (event: ReactMouseEvent<HTMLAnchorElement>) => void;
+}) {
   return (
-    <a className="down-arrow" href={href} aria-label={label}>
+    <a className="down-arrow" href={href} aria-label={label} onClick={onClick}>
       <span aria-hidden="true" />
     </a>
   );
@@ -59,6 +68,24 @@ export default function Home() {
   const activeChannelIndex = channels.findIndex((channel) => channel.id === activeChannel);
   const [headlineIndex, setHeadlineIndex] = useState(0);
   const [carouselPaused, setCarouselPaused] = useState(false);
+
+  const navigateToSection =
+    (sectionId: string, stepIndex: number) =>
+    (event: ReactMouseEvent<HTMLAnchorElement>) => {
+      event.preventDefault();
+
+      const target = document.getElementById(sectionId);
+      if (!target) return;
+
+      setActiveStep(stepIndex);
+      window.history.pushState(null, "", `#${sectionId}`);
+      target.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+        block: "start",
+      });
+    };
 
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>(".v2-section"));
@@ -114,7 +141,12 @@ export default function Home() {
   return (
     <div className="v2-shell">
       <header className="v2-header">
-        <a className="v2-brand" href="#eigenaarschap" aria-label="Wuwai, terug naar het begin">
+        <a
+          className="v2-brand"
+          href="#eigenaarschap"
+          aria-label="Wuwai, terug naar het begin"
+          onClick={navigateToSection("eigenaarschap", 0)}
+        >
           <img src="/wuwai-logo.png" alt="Wuwai" />
         </a>
 
@@ -123,6 +155,7 @@ export default function Home() {
             <a
               key={step.id}
               href={`#${step.id}`}
+              onClick={navigateToSection(step.id, index)}
               className={activeStep === index ? "is-active" : ""}
               aria-current={activeStep === index ? "step" : undefined}
               style={{ "--step-color": step.color } as CSSProperties}
@@ -172,7 +205,11 @@ export default function Home() {
               <p className="hero-subline">
                 <strong>Jij bepaalt wat je uit je leven haalt.</strong>
               </p>
-              <a className="primary-action" href="#ervaring">
+              <a
+                className="primary-action"
+                href="#ervaring"
+                onClick={navigateToSection("ervaring", 1)}
+              >
                 Ontdek hoe
                 <span aria-hidden="true">↓</span>
               </a>
@@ -180,18 +217,29 @@ export default function Home() {
 
           </div>
 
-          <DownArrow href="#ervaring" label="Ga naar stap 2, begrijpen" />
+          <DownArrow
+            href="#ervaring"
+            label="Ga naar stap 2, begrijpen"
+            onClick={navigateToSection("ervaring", 1)}
+          />
         </section>
 
         <section id="ervaring" className="v2-section experience-section">
           <div className="experience-spectrum" aria-hidden="true" />
           <div className="v2-inner experience-layout">
             <div className="experience-copy reveal">
-              <h2>Ontdek wat jou in beweging brengt.</h2>
+              <h2 aria-label="Ontdek wat jou in beweging brengt.">
+                <span>Ontdek wat jou</span>
+                <span>in beweging brengt.</span>
+              </h2>
               <p className="experience-summary">
                 Ervaar groei en geef richting aan je leven.
               </p>
-              <a className="primary-action experience-action" href="#resultaat">
+              <a
+                className="primary-action experience-action desktop-action"
+                href="#resultaat"
+                onClick={navigateToSection("resultaat", 2)}
+              >
                 Ervaar het verschil
                 <span aria-hidden="true">↓</span>
               </a>
@@ -235,6 +283,14 @@ export default function Home() {
               <p className="active-channel-copy">
                 {channels.find((channel) => channel.id === activeChannel)?.copy}
               </p>
+              <a
+                className="primary-action experience-action mobile-action"
+                href="#resultaat"
+                onClick={navigateToSection("resultaat", 2)}
+              >
+                Ervaar het verschil
+                <span aria-hidden="true">↓</span>
+              </a>
             </div>
           </div>
 
@@ -256,7 +312,10 @@ export default function Home() {
               <p className="lead result-supporting-copy">
                 Vertrouw op wat je lichaam je vertelt.
               </p>
-              <a className="app-login-action" href="https://app.wuwai.org/login">
+              <a
+                className="app-login-action desktop-action"
+                href="https://app.wuwai.org/login"
+              >
                 <span>Ontdek de app</span>
                 <i aria-hidden="true">→</i>
               </a>
@@ -277,6 +336,13 @@ export default function Home() {
                 <div className="result-image-shade" aria-hidden="true" />
                 <img className="be-you-mark" src="/be-you.svg" alt="Be You" />
               </div>
+              <a
+                className="app-login-action mobile-action"
+                href="https://app.wuwai.org/login"
+              >
+                <span>Ontdek de app</span>
+                <i aria-hidden="true">→</i>
+              </a>
             </div>
           </div>
         </section>

@@ -64,7 +64,9 @@ test("includes goals, body and coach as one personal experience", () => {
 
 test("retains Be You and links into the Wuwai app", () => {
   assert.match(page, /src="\/be-you\.svg" alt="Be You"/);
-  assert.equal((page.match(/href="https:\/\/app\.wuwai\.org\/login"/g) ?? []).length, 2);
+  assert.equal((page.match(/href="https:\/\/app\.wuwai\.org\/login"/g) ?? []).length, 3);
+  assert.match(page, /className="app-login-action desktop-action"/);
+  assert.match(page, /className="app-login-action mobile-action"/);
   assert.match(page, /<span>Ontdek de app<\/span>/);
   assert.match(page, /<i aria-hidden="true">→<\/i>/);
   assert.match(page, /Ontdek de app/);
